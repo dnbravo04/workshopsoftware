@@ -15,7 +15,11 @@ class SpareParts
         $this->db = new PDO("mysql:host=localhost;dbname=workshopsoftware_db", "root", "");
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-
+public function getAll(){
+    $query = $this->db->prepare("SELECT * FROM repuestos_motocicleta");
+    $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
     public function find($idRepuesto)
     {
         $sql = "SELECT * FROM repuestos_motocicleta WHERE idRepuesto = ?";
@@ -58,5 +62,3 @@ class SpareParts
         return $motocicleta;
     }
 }
-
-?>

@@ -19,6 +19,12 @@ class MaintenanceReportModel
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    public function getAll(){
+        $query = $this->db->prepare("SELECT * FROM reporte_mantenimiento");
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     public function find($idReporte)
     {
         $sql = "SELECT * FROM reporte_mantenimiento WHERE idReporte = ?";

@@ -17,6 +17,12 @@ class MechanicModel
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    public function getAll(){
+        $query = $this->db->prepare("SELECT * FROM mecanico");
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     public function find($idMecanico)
     {
         $sql = "SELECT * FROM mecanico WHERE idMecanico = ?";
