@@ -1,13 +1,11 @@
 <?php
 
-require 'PDO.php';
-
 class Database
 {
     private $host;
+    private $dbname;
     private $user;
     private $password;
-    private $dbname;
 
     public function __construct($host, $dbname, $user, $password)
     {
@@ -35,12 +33,4 @@ class Database
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
-    public function close()
-    {
-        $pdo = $this->connect();
-        $pdo = null;
-    }
 }
-
-?>

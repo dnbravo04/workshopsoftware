@@ -39,6 +39,7 @@ CREATE TABLE `mecanico` (
   `MecEspecializacion` varchar(30) NOT NULL COMMENT 'Area de especializacion del mecanico'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+
 CREATE TABLE `motocicleta` (
   `idMotocicleta` int(11) NOT NULL COMMENT 'Llave Primaria',
   `MtPlaca` varchar(10) NOT NULL COMMENT 'Placa de la Motocicleta',
@@ -49,7 +50,7 @@ CREATE TABLE `motocicleta` (
   `MtCliente` int(11) NOT NULL COMMENT 'Cliente de la motocicleta. Hace referencia a la columna idCliente de la tabla Cliente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `reporte mantenimiento` (
+CREATE TABLE `reporte_mantenimiento` (
   `idReporte` int(11) NOT NULL COMMENT 'Llave Primaria',
   `RepFecha` date NOT NULL COMMENT 'Fecha en la que se realiza el reporte de mantenimineto',
   `RepInformeDiagnostico` varchar(80) NOT NULL COMMENT 'Informe de diagnostico realizado antes del mantenimiento',
@@ -60,8 +61,7 @@ CREATE TABLE `reporte mantenimiento` (
   `RepRepuestosUtilizados` int(11) NOT NULL COMMENT 'Repuestos utilizados durante la reparacion de la motocicleta. Esta hace referencia a la columna idRepuesto de la tabla RepuestoMotocicleta'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-
-CREATE TABLE `repuestos motocicleta` (
+CREATE TABLE `repuestos_motocicleta` (
   `idRepuesto` int(11) NOT NULL COMMENT 'Llave Foranea',
   `RepuCodigo` varchar(35) NOT NULL COMMENT 'Codigo del Repuesto',
   `RepuNombre` varchar(35) NOT NULL COMMENT 'Nombre del Repuesto',
@@ -70,7 +70,6 @@ CREATE TABLE `repuestos motocicleta` (
   `RepuMarca` varchar(20) NOT NULL COMMENT 'Marca del Repuesto',
   `RepuModelo` varchar(15) NOT NULL COMMENT 'Modelo del Repuesto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 ALTER TABLE `administrador`
   ADD PRIMARY KEY (`idAdministrador`),
@@ -98,13 +97,13 @@ ALTER TABLE `motocicleta`
   ADD KEY `Motocicleta_Cliente_FK` (`MtCliente`);
 
 
-ALTER TABLE `reporte mantenimiento`
+ALTER TABLE `reporte_mantenimiento`
   ADD PRIMARY KEY (`idReporte`),
   ADD KEY `Reporte_Motocicleta_FK` (`RepMotocicleta`),
   ADD KEY `Reporte_MecanicoFK` (`RepMecanicoEncargado`),
   ADD KEY `Reporte_Repuesto_FK` (`RepRepuestosUtilizados`);
 
-ALTER TABLE `repuestos motocicleta`
+ALTER TABLE `repuestos_motocicleta`
   ADD PRIMARY KEY (`idRepuesto`);
 
 ALTER TABLE `administrador`
@@ -126,10 +125,10 @@ ALTER TABLE `mecanico`
 ALTER TABLE `motocicleta`
   MODIFY `idMotocicleta` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave Primaria';
 
-ALTER TABLE `reporte mantenimiento`
+ALTER TABLE `reporte_mantenimiento`
   MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave Primaria';
 
-ALTER TABLE `repuestos motocicleta`
+ALTER TABLE `repuestos_motocicleta`
   MODIFY `idRepuesto` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Llave Foranea';
 
 
@@ -137,9 +136,9 @@ ALTER TABLE `motocicleta`
   ADD CONSTRAINT `motocicleta_ibfk_1` FOREIGN KEY (`MtCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
-ALTER TABLE `reporte mantenimiento`
-  ADD CONSTRAINT `reporte mantenimiento_ibfk_1` FOREIGN KEY (`RepMotocicleta`) REFERENCES `motocicleta` (`idMotocicleta`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reporte mantenimiento_ibfk_2` FOREIGN KEY (`RepMecanicoEncargado`) REFERENCES `mecanico` (`idMecanico`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reporte mantenimiento_ibfk_3` FOREIGN KEY (`RepRepuestosUtilizados`) REFERENCES `repuestos motocicleta` (`idRepuesto`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `reporte_mantenimiento`
+  ADD CONSTRAINT `reporte_mantenimiento_ibfk_1` FOREIGN KEY (`RepMotocicleta`) REFERENCES `motocicleta` (`idMotocicleta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reporte_mantenimiento_ibfk_2` FOREIGN KEY (`RepMecanicoEncargado`) REFERENCES `mecanico` (`idMecanico`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reporte_mantenimiento_ibfk_3` FOREIGN KEY (`RepRepuestosUtilizados`) REFERENCES `repuestos_motocicleta` (`idRepuesto`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

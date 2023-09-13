@@ -20,15 +20,18 @@ class ClientModel
 
     public function getAll()
     {
-        $sql = "SELECT * FROM clientes";
+        $sql = "SELECT * FROM cliente";
         $stmt = $this->db->query($sql);
 
+        if ($stmt->errorInfo()[0] !== '00000') {
+            throw new Exception('Error al obtener los clientes');
+        }
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function find($idCliente)
     {
-        $sql = "SELECT * FROM clientes WHERE idCliente = ?";
+        $sql = "SELECT * FROM cliente WHERE idCliente = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$idCliente]);
 
@@ -37,16 +40,17 @@ class ClientModel
 
     public function save()
     {
-        $sql = "INSERT INTO clientes (CliDocumento, CliNombre, CliApellido, CliTelefono, CliTelefonoSecundario, CliCorreo, CliDireccion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO cliente (CliDocumento, CliNombre, CliApellido, CliTelefono, CliTelefonoSecundario, CliCorreo, CliDireccion) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->CliDocumento, $this->CliNombre, $this->CliApellido, $this->CliTelefono, $this->CliTelefonoSecundario, $this->CliCorreo, $this->CliDireccion]);
 
         return $stmt->rowCount();
     }
 
+
     public function update()
     {
-        $sql = "UPDATE clientes SET CliDocumento = ?, CliNombre = ?, CliApellido = ?, CliTelefono = ?, CliTelefonoSecundario = ?, CliCorreo = ?, CliDireccion = ? WHERE idCliente = ?";
+        $sql = "UPDATE cliente SET CliDocumento = ?, CliNombre = ?, CliApellido = ?, CliTelefono = ?, CliTelefonoSecundario = ?, CliCorreo = ?, CliDireccion = ? WHERE idCliente = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->CliDocumento, $this->CliNombre, $this->CliApellido, $this->CliTelefono, $this->CliTelefonoSecundario, $this->CliCorreo, $this->CliDireccion, $this->idCliente]);
 
@@ -55,7 +59,7 @@ class ClientModel
 
     public function delete()
     {
-        $sql = "DELETE FROM clientes WHERE idCliente = ?";
+        $sql = "DELETE FROM cliente WHERE idCliente = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->idCliente]);
 
