@@ -1,5 +1,3 @@
-Tengo una aplicación llamada workshopsoftware. Esta se encarga de administrar talleres de motocicleta y genera informes de mantenimiento. Está basada en la siguiente estructura.
-
 workshopsoftware/
 ├── controllers/
 |   ├── AdminController.php
@@ -19,53 +17,50 @@ workshopsoftware/
 |   └── MororbikeModel.php
 |-- views/
 |   |── admin/
-|   |   ├── index.php               # Lista de administradores
-|   |   ├── edit.php                # Formulario de edición de administrador
-|   |   ├── create.php              # Formulario de creación de administrador
-|   |   └── ...                     # Otras vistas relacionadas con administradores
+|   |   ├── index.php
+|   |   ├── edit.php
+|   |   ├── create.php
+|   |   └── delete.php
 |   |
 |   |── client/
-|   |   ├── index.php               # Lista de clientes
-|   |   ├── edit.php                # Formulario de edición de cliente
-|   |   ├── create.php              # Formulario de creación de cliente
-|   |   └── ...                     # Otras vistas relacionadas con clientes
+|   |   ├── index.php
+|   |   ├── edit.php
+|   |   ├── create.php
+|   |   └── delete.php
 |   |
 |   |── logistical_assistant/
-|   |   ├── index.php               # Lista de asistentes logísticos
-|   |   ├── edit.php                # Formulario de edición de asistente logístico
-|   |   ├── create.php              # Formulario de creación de asistente logístico
-|   |   └── ...                     # Otras vistas relacionadas con asistentes logísticos
+|   |   ├── index.php
+|   |   ├── edit.php
+|   |   ├── create.php
+|   |   └── delete.php
 |   |
 |   |── maintenance_report/
-|   |   ├── index.php               # Lista de informes de mantenimiento
-|   |   ├── edit.php                # Formulario de edición de informe de mantenimiento
-|   |   ├── create.php              # Formulario de creación de informe de mantenimiento
-|   |   └── ...                     # Otras vistas relacionadas con informes de mantenimiento
+|   |   ├── index.php
+|   |   ├── edit.php
+|   |   ├── create.php
+|   |   └── delete.php
 |   |
 |   |── mechanic/
-|   |   ├── index.php               # Lista de mecánicos
-|   |   ├── edit.php                # Formulario de edición de mecánico
-|   |   ├── create.php              # Formulario de creación de mecánico
-|   |   └── ...                     # Otras vistas relacionadas con mecánicos
+|   |   ├── index.php
+|   |   ├── edit.php
+|   |   ├── create.php
+|   |   └── delete.php
 |   |
 |   |── motorbike/
-|   |   ├── index.php               # Lista de motocicletas
-|   |   ├── edit.php                # Formulario de edición de motocicleta
-|   |   ├── create.php              # Formulario de creación de motocicleta
-|   |   └── ...                     # Otras vistas relacionadas con motocicletas
+|   |   ├── index.php
+|   |   ├── edit.php
+|   |   ├── create.php
+|   |   └── delete.php
 |   |
 |   |── spare_parts/
-|   |   ├── index.php               # Lista de repuestos
-|   |   ├── edit.php                # Formulario de edición de repuesto
-|   |   ├── create.php              # Formulario de creación de repuesto
-|   |   └── ...                     # Otras vistas relacionadas con repuestos
+|   |   ├── index.php
+|   |   ├── edit.php
+|   |   ├── create.php
+|   |   └── delete.php
 |   |-- assets/
 |   └── shared/
 |       ├── header.php              # Encabezado compartido
-|       ├── footer.php              # Pie de página compartido
-|       └── ...                     # Otros elementos compartidos
+|       └──footer.php              # Pie de página compartido
 |--db.php
 |──index.php
 └── docs/
-
-Necesito que me ayudes a crear la logica del front, ya que el resto está creado usando un odelo mvc con php, y me gustaria que pudieramos seguir usando ese lenguaje sin frameworks del backend. Está bien si te envío tambien como está diseñada la base de datos, los modelos y los controladores?

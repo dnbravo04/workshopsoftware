@@ -1,111 +1,137 @@
 <?php
-require_once 'models/AdminModel.php';
+include '../../models/AdminModel.php';
 
 class AdminController
 {
-    private $administradorModel;
+    private $adminModel;
 
     public function __construct()
     {
-        $this->administradorModel = new AdminModel();
+        $this->adminModel = new AdminModel();
     }
 
-    public function index()
+    public function getAllAdmins()
     {
-        $administradores = $this->administradorModel->getAll();
-        include 'views/admin/index.php';
+        try {
+            $admins = $this->adminModel->getAll();
+            return $admins;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    private function getAdminById($id)
+    {
+        try {
+            return $this->adminModel->find($id);
+        } catch (Exception $e) {
+            // Log the exception and return null
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+
+    private function createAdmin($data)
+    {
+        try {
+            $this->adminModel->AdmDocumento = $data['AdmDocumento'];
+            $this->adminModel->AdmNombre = $data['AdmNombre'];
+            $this->adminModel->AdmApellido = $data['AdmApellido'];
+            $this->adminModel->AdmTelefono = $data['AdmTelefono'];
+            $this->adminModel->AdmCorreo = $data['AdmCorreo'];
+
+            return $this->adminModel->save();
+        } catch (Exception $e) {
+            // Log the exception and return false
+            echo $e->getMessage();
+            return false;
+        }
     }
 
     public function create()
     {
-        include 'views/admin/create.php';
-    }
-
-    public function store()
-    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Obtener los datos del formulario
-            $documento = $_POST['AdmDocumento'];
-            $nombre = $_POST['AdmNombre'];
-            $apellido = $_POST['AdmApellido'];
-            $telefono = $_POST['AdmTelefono'];
-            $correo = $_POST['AdmCorreo'];
+            $data = [
+                'AdmDocumento' => $_POST['AdmDocumento'],
+                'AdmNombre' => $_POST['AdmNombre'],
+                'AdmApellido' => $_POST['AdmApellido'],
+                'AdmTelefono' => $_POST['AdmTelefono'],
+                'AdmCorreo' => $_POST['AdmCorreo'],
+                'AdmUsuario' => $_POST['AdmUsuario'],
+                'AdmContraseña' => $_POST['AdmContraseña']
+            ];
 
-            // Crear una nueva instancia de Administrador
-            $administrador = new AdminModel();
-            $administrador->AdmDocumento = $documento;
-            $administrador->AdmNombre = $nombre;
-            $administrador->AdmApellido = $apellido;
-            $administrador->AdmTelefono = $telefono;
-            $administrador->AdmCorreo = $correo;
-
-            // Guardar el administrador en la base de datos
-            $result = $administrador->save();
+            $result = $this->createAdmin($data);
 
             if ($result) {
-                header('Location: index.php?action=admin.index');
+                header('Location: index.php?action=controller&controller=admin&action=index');
             } else {
-                // Manejar el error, por ejemplo, mostrar un mensaje de error
+                echo "Error al crear el administrador";
             }
         }
     }
 
-    public function edit($id)
+    public function edit($idAdmin)
     {
-        $administrador = $this->administradorModel->find($id);
+        if (empty($idAdmin) || !is_numeric($idAdmin)) {
+            echo "ID de cliente no válido";
+            return;
+        }
+        $admin = $this->getAdminById($idAdmin);
 
-        if ($administrador) {
-            include 'views/admin/edit.php';
-        } else {
-            // Manejar el error, por ejemplo, redirigir a una página de error
+        if ($admin === null) {
+            echo "Administrador no encontrado";
+            return;
+        }
+        $this->updateAdmin($admin);
+        include 'views/admin/edit.php';
+    }
+
+
+    public function updateAdmin($data)
+    {
+
+        try {
+            $this->adminModel->idAdministrador = $data['idAdministrador'];
+            $this->adminModel->AdmDocumento = $data['AdmDocumento'];
+            $this->adminModel->AdmNombre = $data['AdmNombre'];
+            $this->adminModel->AdmApellido = $data['AdmApellido'];
+            $this->adminModel->AdmTelefono = $data['AdmTelefono'];
+            $this->adminModel->AdmCorreo = $data['AdmCorreo'];
+            $this->adminModel->AdmUsuario = $data['AdmUsuario'];
+            $this->adminModel->AdmContraseña = $data['AdmContraseña'];
+
+            return $this->adminModel->update();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return false;
         }
     }
 
-    public function update()
+    private function deleteAdmin($idAdmin)
+    {
+        try {
+            $this->adminModel->idAdministrador = $idAdmin;
+            return $this->adminModel->delete();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Obtener los datos del formulario
-            $id = $_POST['idAdministrador'];
-            $documento = $_POST['AdmDocumento'];
-            $nombre = $_POST['AdmNombre'];
-            $apellido = $_POST['AdmApellido'];
-            $telefono = $_POST['AdmTelefono'];
-            $correo = $_POST['AdmCorreo'];
+            $idAdmin = $_POST['idCliente'];
 
-            // Crear una nueva instancia de Administrador
-            $administrador = new AdminModel();
-            $administrador->idAdministrador = $id;
-            $administrador->AdmDocumento = $documento;
-            $administrador->AdmNombre = $nombre;
-            $administrador->AdmApellido = $apellido;
-            $administrador->AdmTelefono = $telefono;
-            $administrador->AdmCorreo = $correo;
-
-            // Actualizar el administrador en la base de datos
-            $result = $administrador->update();
+            $result = $this->deleteAdmin($idAdmin);
 
             if ($result) {
-                header('Location: index.php?action=admin.index');
+                header('Location: index.php?controller=admin&action=index');
             } else {
-                // Manejar el error, por ejemplo, mostrar un mensaje de error
+                echo "Error al eliminar el administrador";
             }
-        }
-    }
-
-    public function delete($id)
-    {
-        // Crear una nueva instancia de Administrador
-        $administrador = new AdminModel();
-        $administrador->idAdministrador = $id;
-
-        // Eliminar el administrador de la base de datos
-        $result = $administrador->delete();
-
-        if ($result) {
-            header('Location: index.php?action=admin.index');
-        } else {
-            // Manejar el error, por ejemplo, mostrar un mensaje de error
         }
     }
 }
-?>

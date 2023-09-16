@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es-CO">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="views/styles/styles.css">
 </head>
-<body>
-    <?php include '../shared/header.php'; ?>
 
+<body>
+    <?php
+    include '../shared/header.php';
+    include '../../controllers/ClientController.php';
+    ?>
     <div class="container mx-auto mt-10">
         <h2 class="text-2xl font-semibold mb-4">Crear Cliente</h2>
-        <form action="../../controllers/ClientController.php?action=create" method="POST">
+        <form action="index.php?controller=client&action=create" method="POST">
             <div class="mb-4">
                 <label for="CliDocumento" class="block text-gray-700">Documento:</label>
                 <input type="text" id="CliDocumento" name="CliDocumento" class="w-full border border-gray-300 rounded p-2" required>
@@ -51,4 +55,5 @@
 
     <?php include '../shared/footer.php'; ?>
 </body>
+
 </html>

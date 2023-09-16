@@ -1,6 +1,7 @@
 <?php
 
-include 'c:\xampp\htdocs\workshopsoftware\models\ClientModel.php';
+include '../../models/ClientModel.php';
+
 class ClientController
 {
     private $clientModel;
@@ -12,7 +13,6 @@ class ClientController
 
     public function getAllClients()
     {
-        echo'Emmmm... Que haces aquí?';
         try {
             $clients = $this->clientModel->getAll();
             return $clients;
@@ -22,13 +22,12 @@ class ClientController
         }
     }
 
-
     public function getClientById($idCliente)
     {
         try {
             return $this->clientModel->find($idCliente);
         } catch (Exception $e) {
-            // Manejo de errores aquí
+            error_log($e->getMessage());
             return null;
         }
     }
@@ -46,10 +45,12 @@ class ClientController
 
             return $this->clientModel->save();
         } catch (Exception $e) {
-            // Manejo de errores aquí
-            return 0;
+            // Log the exception and return null
+            echo $e->getMessage();
+            return null;
         }
     }
+
     public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -64,20 +65,37 @@ class ClientController
                 'CliDireccion' => $_POST['CliDireccion'],
             ];
 
-            // Llama a la función para crear el cliente
+            // Guarda el cliente en la base de datos
             $result = $this->createClient($data);
 
-            if ($result) {
-                // El cliente se creó correctamente, puedes redirigir a otra página o mostrar un mensaje de éxito.
-                echo 'Listo Calisto';
-                header('Location: ../views/client/index.php?controller=client&action=getAllClients');
+            // Si el cliente se guardó correctamente, redirige a la lista de clientes
+            if ($result !== null) {
+                header('Location: index.php?controller=client&action=index');
                 exit();
             } else {
-                // Ocurrió un error al crear el cliente, muestra un mensaje de error o redirige a una página de error.
+                // Si el cliente no se guardó correctamente, muestra un mensaje de error
                 echo "Error al crear el cliente";
             }
         }
     }
+
+    public function edit($idCliente)
+    {
+
+        if (empty($idCliente) || !is_numeric($idCliente)) {
+            echo "ID de cliente no válido";
+            return;
+        }
+        $cliente = $this->getClientById($idCliente);
+
+        if ($cliente === null) {
+            echo "Cliente no encontrado";
+            return;
+        }
+        $this->updateClient($cliente);
+        include 'views/client/edit.php';
+    }
+
     public function updateClient($data)
     {
         try {
@@ -92,7 +110,7 @@ class ClientController
 
             return $this->clientModel->update();
         } catch (Exception $e) {
-            // Manejo de errores aquí
+            echo $e->getMessage();
             return 0;
         }
     }
@@ -103,8 +121,26 @@ class ClientController
             $this->clientModel->idCliente = $idCliente;
             return $this->clientModel->delete();
         } catch (Exception $e) {
-            // Manejo de errores aquí
-            return 0;
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function delete()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $idCliente = $_POST['idCliente'];
+
+            $result = $this->deleteClient($idCliente);
+
+            if ($result) {
+                // La eliminación se realizó correctamente, puedes redirigir a otra página o mostrar un mensaje de éxito.
+                header('Location: index.php?controller=client&action=index');
+                exit();
+            } else {
+                // Ocurrió un error al eliminar el cliente, muestra un mensaje de error o redirige a una página de error.
+                echo "Error al eliminar el cliente";
+            }
         }
     }
 }

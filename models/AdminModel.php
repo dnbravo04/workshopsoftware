@@ -9,6 +9,8 @@ class AdminModel
     public $AdmApellido;
     public $AdmTelefono;
     public $AdmCorreo;
+    public $AdmUsuario;
+    public $AdmContraseña;
 
     public function __construct()
     {
@@ -18,14 +20,14 @@ class AdminModel
 
     public function getAll()
     {
-        $sql = "SELECT * FROM administradores";
+        $sql = "SELECT * FROM administrador";
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function find($idAdministrador)
     {
-        $sql = "SELECT * FROM administradores WHERE idAdministrador = ?";
+        $sql = "SELECT * FROM administrador WHERE idAdministrador = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$idAdministrador]);
 
@@ -35,16 +37,16 @@ class AdminModel
 
     public function save()
     {
-        $sql = "INSERT INTO administradores (AdmDocumento, AdmNombre, AdmApellido, AdmTelefono, AdmCorreo) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO administrador (AdmDocumento, AdmNombre, AdmApellido, AdmTelefono, AdmCorreo, AdmUsuario, AdmContraseña) VALUES (?, ?, ?, ?, ?,?,?)";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$this->AdmDocumento, $this->AdmNombre, $this->AdmApellido, $this->AdmTelefono, $this->AdmCorreo]);
+        $stmt->execute([$this->AdmDocumento, $this->AdmNombre, $this->AdmApellido, $this->AdmTelefono, $this->AdmCorreo, $this->AdmUsuario, $this->AdmContraseña]);
 
         return $stmt->rowCount();
     }
 
     public function update()
     {
-        $sql = "UPDATE administradores SET AdmDocumento = ?, AdmNombre = ?, AdmApellido = ?, AdmTelefono = ?, AdmCorreo = ? WHERE idAdministrador = ?";
+        $sql = "UPDATE administrador SET AdmDocumento = ?, AdmNombre = ?, AdmApellido = ?, AdmTelefono = ?, AdmCorreo = ?, AdmUsuario = ?, AdmContraseña = ? WHERE idAdministrador = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->AdmDocumento, $this->AdmNombre, $this->AdmApellido, $this->AdmTelefono, $this->AdmCorreo, $this->idAdministrador]);
 
@@ -53,7 +55,7 @@ class AdminModel
 
     public function delete()
     {
-        $sql = "DELETE FROM administradores WHERE idAdministrador = ?";
+        $sql = "DELETE FROM administrador WHERE idAdministrador = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->idAdministrador]);
 

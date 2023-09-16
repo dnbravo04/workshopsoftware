@@ -29,18 +29,23 @@ class ClientModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function find($idCliente)
+    public function find(int $idCliente)
     {
-        $sql = "SELECT * FROM cliente WHERE idCliente = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$idCliente]);
-
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $query = "SELECT * FROM cliente WHERE idCliente = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $idCliente);
+        $stmt->execute();
+    
+        $clientData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return $clientData ?: [];
     }
+    
+
 
     public function save()
     {
-        $sql = "INSERT INTO cliente (CliDocumento, CliNombre, CliApellido, CliTelefono, CliTelefonoSecundario, CliCorreo, CliDireccion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO `cliente`(`CliDocumento`, `CliNombre`, `CliApellido`, `CliTelefono`, `CliTelefonoSecundario`, `CliCorreo`, `CliDireccion`) VALUES ('?','?','?','?','?','?','?')";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->CliDocumento, $this->CliNombre, $this->CliApellido, $this->CliTelefono, $this->CliTelefonoSecundario, $this->CliCorreo, $this->CliDireccion]);
 

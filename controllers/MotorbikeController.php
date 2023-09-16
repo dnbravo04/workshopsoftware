@@ -47,7 +47,6 @@ class MotorbikeController
         if ($result) {
             header('Location: index.php?action=motorbike.index');
         } else {
-            // Manejar el error, por ejemplo, mostrar un mensaje de error
         }
     }
 
@@ -73,7 +72,6 @@ class MotorbikeController
         $color = $_POST['MtColor'];
         $cliente = $_POST['MtCliente'];
 
-        // Crear una nueva instancia de Motocicleta
         $motocicleta = new MotorbikeModel();
         $motocicleta->idMotocicleta = $id;
         $motocicleta->MtPlaca = $placa;
@@ -82,30 +80,23 @@ class MotorbikeController
         $motocicleta->MtCilindraje = $cilindraje;
         $motocicleta->MtColor = $color;
         $motocicleta->MtCliente = $cliente;
-
-        // Actualizar la motocicleta en la base de datos
         $result = $motocicleta->update();
 
         if ($result) {
             header('Location: index.php?action=motorbike.index');
         } else {
-            // Manejar el error, por ejemplo, mostrar un mensaje de error
         }
     }
 
     public function delete($id)
     {
-        // Crear una nueva instancia de Motocicleta
         $motocicleta = new MotorbikeModel();
         $motocicleta->idMotocicleta = $id;
-
-        // Eliminar la motocicleta de la base de datos
         $result = $motocicleta->delete();
 
         if ($result) {
             header('Location: index.php?action=motorbike.index');
         } else {
-            // Manejar el error, por ejemplo, mostrar un mensaje de error
         }
     }
 }
