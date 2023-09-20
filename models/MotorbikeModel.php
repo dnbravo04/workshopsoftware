@@ -14,10 +14,9 @@ class MotorbikeModel
 
     public function __construct()
     {
-        if (!isset(self::$db)) {
-            self::$db = new PDO("mysql:host=localhost;dbname=workshopsoftware_db", "root", "");
-            self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
+
+        $this->db = new PDO("mysql:host=localhost;dbname=workshopsoftware_db", "root", "");
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public function getAll()
@@ -39,7 +38,7 @@ class MotorbikeModel
 
     public function update()
     {
-        $sql = "UPDATE motocicletas SET MtPlaca = ?, MtMarca = ?, MtModelo = ?, MtCilindraje = ?, MtColor = ?, MtCliente = ? WHERE idMotocicleta = ?";
+        $sql = "UPDATE motocicleta SET MtPlaca = ?, MtMarca = ?, MtModelo = ?, MtCilindraje = ?, MtColor = ?, MtCliente = ? WHERE idMotocicleta = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->MtPlaca, $this->MtMarca, $this->MtModelo, $this->MtCilindraje, $this->MtColor, $this->MtCliente, $this->idMotocicleta]);
 
@@ -48,7 +47,7 @@ class MotorbikeModel
 
     public function delete()
     {
-        $sql = "DELETE FROM motocicletas WHERE idMotocicleta = ?";
+        $sql = "DELETE FROM motocicleta WHERE idMotocicleta = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->idMotocicleta]);
 
@@ -57,7 +56,7 @@ class MotorbikeModel
 
     public function find($id)
     {
-        $sql = "SELECT * FROM motocicletas WHERE idMotocicleta = ?";
+        $sql = "SELECT * FROM motocicleta WHERE idMotocicleta = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
 

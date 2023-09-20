@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <?php include 'views/shared/footer.php'; ?>
+    <?php include 'shared/footer.php'; ?>
 </body>
 
 </html>

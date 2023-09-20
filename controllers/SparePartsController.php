@@ -1,96 +1,125 @@
 <?php
 
+include '../../models/SparePartsModel.php';
+
 class SparePartsController
 {
-    public function index()
-    {
-        // Lógica para mostrar la lista de repuestos
-        $sparePartsModel = new SpareParts();
-        $spareParts = $sparePartsModel->getAll(); // Asegúrate de tener un método getAll en tu modelo
 
-        // Puedes cargar la vista correspondiente y pasar los datos de los repuestos a la vista
-        include 'views/spareparts/index.php';
+    private $sparePartsModel;
+    public function __construct()
+    {
+        $this->sparePartsModel = new SparePartsModel();
+    }
+    public function getAllSpareParts()
+    {
+
+        try {
+            $spareParts = $this->sparePartsModel->getAll();
+            return $spareParts;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+    public function getSparePartsById($idRepiesto)
+    {
+        try {
+            $spareParts = $this->sparePartsModel->find($idRepiesto);
+            return $spareParts;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+    public function createSpareParts($data)
+    {
+        try {
+            $this->sparePartsModel->RepuCodigo = $data['RepuCodigo'];
+            $this->sparePartsModel->RepuNombre = $data['RepuNombre'];
+            $this->sparePartsModel->RepuDescripcion = $data['RepuDescripcion'];
+            $this->sparePartsModel->RepuTipo = $data['RepuTipo'];
+            $this->sparePartsModel->RepuMarca = $data['RepuMarca'];
+            $this->sparePartsModel->RepuModelo = $data['RepuModelo'];
+
+            return $this->sparePartsModel->save($data);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
     }
 
     public function create()
     {
-        // Lógica para mostrar el formulario de creación de repuestos
-        include 'views/spareparts/create.php';
-    }
-
-    public function store()
-    {
-        // Lógica para almacenar un nuevo repuesto en la base de datos
-        // Recuperar los datos del formulario
-        $RepNombre = $_POST['RepNombre'];
-        $RepCantidad = $_POST['RepCantidad'];
-        $RepCosto = $_POST['RepCosto'];
-        $RepMotocicleta = $_POST['RepMotocicleta'];
-
-        // Crear una instancia del modelo y guardar los datos
-        $sparePartsModel = new SpareParts();
-        $sparePartsModel->RepNombre = $RepNombre;
-        $sparePartsModel->RepCantidad = $RepCantidad;
-        $sparePartsModel->RepCosto = $RepCosto;
-        $sparePartsModel->RepMotocicleta = $RepMotocicleta;
-
-        if ($sparePartsModel->save()) {
-            // Redirigir o mostrar un mensaje de éxito
-            header('Location: index.php');
-        } else {
-            // Mostrar un mensaje de error
-            echo 'Error al guardar el repuesto.';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'RepuCodigo' => $_POST['RepuCodigo'],
+                'RepuNombre' => $_POST['RepuNombre'],
+                'RepuDescripcion' => $_POST['RepuDescripcion'],
+                'RepuTipo' => $_POST['RepuTipo'],
+                'RepuMarca' => $_POST['RepuMarca'],
+                'RepuModelo' => $_POST['RepuModelo'],
+            ];
+            $result = $this->createSpareParts($data);
+            if ($result !== null) {
+                header('Location: index.php');
+                exit();
+            } else {
+                echo "Error al crear el repuesto";
+            }
         }
     }
-
-    public function edit($id)
+    public function edit($idRepiesto)
     {
-        // Lógica para mostrar el formulario de edición de un repuesto
-        $sparePartsModel = new SpareParts();
-        $sparePart = $sparePartsModel->find($id);
-
-        // Puedes cargar la vista correspondiente y pasar los datos del repuesto a la vista
-        include 'views/spareparts/edit.php';
+        if (empty($idRepiesto) || !is_numeric($idRepiesto)) {
+            echo "ID de repuesto no válido";
+            return;
+        }
+        $repuesto = $this->getSparePartsById($idRepiesto);
+        if ($repuesto === null) {
+            echo "Repuesto no encontrado";
+            return;
+        }
+        $this->updateSpareParts($repuesto);
+        include 'views/spare_parts/edit.php';
     }
-
-    public function update($id)
+    public function updateSpareParts($data)
     {
-        // Lógica para actualizar los datos de un repuesto en la base de datos
-        // Recuperar los datos del formulario
-        $RepNombre = $_POST['RepNombre'];
-        $RepCantidad = $_POST['RepCantidad'];
-        $RepCosto = $_POST['RepCosto'];
-        $RepMotocicleta = $_POST['RepMotocicleta'];
-
-        // Crear una instancia del modelo y actualizar los datos
-        $sparePartsModel = new SpareParts();
-        $sparePartsModel->idRepuesto = $id;
-        $sparePartsModel->RepNombre = $RepNombre;
-        $sparePartsModel->RepCantidad = $RepCantidad;
-        $sparePartsModel->RepCosto = $RepCosto;
-        $sparePartsModel->RepMotocicleta = $RepMotocicleta;
-
-        if ($sparePartsModel->update()) {
-            // Redirigir o mostrar un mensaje de éxito
-            header('Location: index.php');
-        } else {
-            // Mostrar un mensaje de error
-            echo 'Error al actualizar el repuesto.';
+        try {
+            $this->sparePartsModel->idRepuesto = $data['idRepuesto'];
+            $this->sparePartsModel->RepuCodigo = $data['RepuCodigo'];
+            $this->sparePartsModel->RepuNombre = $data['RepuNombre'];
+            $this->sparePartsModel->RepuDescripcion = $data['RepuDescripcion'];
+            $this->sparePartsModel->RepuTipo = $data['RepuTipo'];
+            $this->sparePartsModel->RepuMarca = $data['RepuMarca'];
+            $this->sparePartsModel->RepuModelo = $data['RepuModelo'];
+            return $this->sparePartsModel->update($data);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return 0;
         }
     }
-
-    public function delete($id)
+    public function deleteSpareParts($idRepiesto)
     {
-        // Lógica para eliminar un repuesto de la base de datos
-        $sparePartsModel = new SpareParts();
-        $sparePartsModel->idRepuesto = $id;
+        try {
+            $this->sparePartsModel->idRepuesto = $idRepiesto;
+            return $this->sparePartsModel->delete($idRepiesto);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+    public function delete()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $idRepiesto = $_POST['idRepuesto'];
+            $result = $this->deleteSpareParts($idRepiesto);
+            if ($result) {
 
-        if ($sparePartsModel->delete()) {
-            // Redirigir o mostrar un mensaje de éxito
-            header('Location: index.php');
-        } else {
-            // Mostrar un mensaje de error
-            echo 'Error al eliminar el repuesto.';
+                header('Location: index.php');
+                exit();
+            } else {
+                echo "Error al eliminar el repuesto";
+            }
         }
     }
 }

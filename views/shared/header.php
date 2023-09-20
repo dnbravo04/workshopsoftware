@@ -1,7 +1,9 @@
 <nav class="bg-gray-800 p-6">
     <div class="container mx-auto flex items-center justify-between">
         <div class="flex items-center flex-shrink-0 text-white">
-            <img src="/views/assets/logo.png" class="object-contain h-11" alt="Logo">
+            <a href="/workshopsoftware/views/index.php">
+                <img src="/workshopsoftware/views/assets/logo.png" class="object-contain h-11" alt="Logo">
+            </a>
         </div>
 
         <div class="block lg:hidden">
@@ -14,9 +16,6 @@
 
         <div id="mobileMenu" class="w-full lg:w-auto block lg:flex-grow lg:flex lg:items-center lg:justify-end hidden">
             <div class="text-lg lg:flex-grow">
-                <a href="/workshopsoftware/views/index.php" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white ml-4">
-                    Inicio
-                </a>
                 <a href="/workshopsoftware/views/admin/index.php" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white ml-4">
                     Administradores
                 </a>

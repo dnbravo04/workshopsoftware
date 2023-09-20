@@ -19,7 +19,7 @@ class LoginController
             $_SESSION['user_id'] = $user['id'];
             header('Location: ../../views/index.php');
         } else {
-            $warning = "Invalid username or password.";
+            $warning = "Nombre de usuario o clave incorrectos.";
         }
 
         if (isset($warning)) {

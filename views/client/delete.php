@@ -1,8 +1,8 @@
 <?php
+    include '../../controllers/ClientController.php';
 if (isset($_GET['id'])) {
     $idCliente = $_GET['id'];
 
-    include '../../controllers/ClientController.php';
     $clientController = new ClientController();
 
     $cliente = $clientController->getClientById($idCliente);

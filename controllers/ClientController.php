@@ -1,6 +1,6 @@
 <?php
 
-include '../../models/ClientModel.php';
+include_once '../../models/ClientModel.php';
 
 class ClientController
 {
@@ -17,8 +17,8 @@ class ClientController
             $clients = $this->clientModel->getAll();
             return $clients;
         } catch (Exception $e) {
-            // Manejo de errores aquí
-            return [];
+            echo $e->getMessage();
+            return null;
         }
     }
 
@@ -45,7 +45,6 @@ class ClientController
 
             return $this->clientModel->save();
         } catch (Exception $e) {
-            // Log the exception and return null
             echo $e->getMessage();
             return null;
         }
@@ -54,7 +53,7 @@ class ClientController
     public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Procesa los datos del formulario y guarda el cliente en la base de datos
+
             $data = [
                 'CliDocumento' => $_POST['CliDocumento'],
                 'CliNombre' => $_POST['CliNombre'],
@@ -65,15 +64,13 @@ class ClientController
                 'CliDireccion' => $_POST['CliDireccion'],
             ];
 
-            // Guarda el cliente en la base de datos
+
             $result = $this->createClient($data);
 
-            // Si el cliente se guardó correctamente, redirige a la lista de clientes
             if ($result !== null) {
-                header('Location: index.php?controller=client&action=index');
+                header('Location: index.php');
                 exit();
             } else {
-                // Si el cliente no se guardó correctamente, muestra un mensaje de error
                 echo "Error al crear el cliente";
             }
         }
@@ -134,11 +131,9 @@ class ClientController
             $result = $this->deleteClient($idCliente);
 
             if ($result) {
-                // La eliminación se realizó correctamente, puedes redirigir a otra página o mostrar un mensaje de éxito.
-                header('Location: index.php?controller=client&action=index');
+                header('Location: index.php');
                 exit();
             } else {
-                // Ocurrió un error al eliminar el cliente, muestra un mensaje de error o redirige a una página de error.
                 echo "Error al eliminar el cliente";
             }
         }

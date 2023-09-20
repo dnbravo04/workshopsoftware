@@ -29,7 +29,7 @@
     ?>
             <div class="container mx-auto mt-10">
                 <h2 class="text-2xl font-semibold mb-4">Editar Cliente</h2>
-                <form action="index.php?controller=client&action=edit" method="POST">
+                <form action="" method="POST">
                     <!-- Campo oculto para almacenar el idCliente -->
                     <input type="hidden" name="idCliente" value="<?php echo $cliente['idCliente']; ?>">
                     <div class="mb-4">

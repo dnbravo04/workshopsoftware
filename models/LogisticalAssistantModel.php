@@ -1,5 +1,5 @@
 <?php
-class LogisticalAsistantModel
+class LogisticalAssistantModel
 {
     private $db;
 
@@ -17,14 +17,14 @@ class LogisticalAsistantModel
     }
     public function getAll()
     {
-        $sql = "SELECT * FROM asistentes_logisticos";
+        $sql = "SELECT * FROM asistentelogistico";
         $stmt = $this->db->query($sql);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function find($idAsistLogistico)
     {
-        $sql = "SELECT * FROM asistenteslogisticos WHERE idAsistLogistico = ?";
+        $sql = "SELECT * FROM asistentelogistico WHERE idAsistLogistico = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$idAsistLogistico]);
 
@@ -33,7 +33,7 @@ class LogisticalAsistantModel
 
     public function save()
     {
-        $sql = "INSERT INTO asistenteslogisticos (ALDocumento, ALNombre, ALApellido, ALTelefono, ALCorreo) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO asistentelogistico (ALDocumento, ALNombre, ALApellido, ALTelefono, ALCorreo) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->ALDocumento, $this->ALNombre, $this->ALApellido, $this->ALTelefono, $this->ALCorreo]);
 
@@ -42,7 +42,7 @@ class LogisticalAsistantModel
 
     public function update()
     {
-        $sql = "UPDATE asistenteslogisticos SET ALDocumento = ?, ALNombre = ?, ALApellido = ?, ALTelefono = ?, ALCorreo = ? WHERE idAsistLogistico = ?";
+        $sql = "UPDATE asistentelogistico SET ALDocumento = ?, ALNombre = ?, ALApellido = ?, ALTelefono = ?, ALCorreo = ? WHERE idAsistLogistico = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->ALDocumento, $this->ALNombre, $this->ALApellido, $this->ALTelefono, $this->ALCorreo, $this->idAsistLogistico]);
 
@@ -51,7 +51,7 @@ class LogisticalAsistantModel
 
     public function delete()
     {
-        $sql = "DELETE FROM asistenteslogisticos WHERE idAsistLogistico = ?";
+        $sql = "DELETE FROM asistentelogistico WHERE idAsistLogistico = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->idAsistLogistico]);
 

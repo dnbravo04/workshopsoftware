@@ -16,7 +16,7 @@
     ?>
     <div class="container mx-auto mt-10">
         <h2 class="text-2xl font-semibold mb-4">Crear Cliente</h2>
-        <form action="index.php?controller=client&action=create" method="POST">
+        <form action="" method="POST">
             <div class="mb-4">
                 <label for="CliDocumento" class="block text-gray-700">Documento:</label>
                 <input type="text" id="CliDocumento" name="CliDocumento" class="w-full border border-gray-300 rounded p-2" required>
