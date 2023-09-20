@@ -45,6 +45,7 @@
                             <td class="text-left py-2 px-4">
                                 <a href="edit.php?id=<?php echo $client['idCliente']; ?>" class="text-blue-500 hover:underline">Editar</a>
                                 <a href="delete.php?id=<?php echo $client['idCliente']; ?>" class="text-red-500 hover:underline ml-4">Eliminar</a>
+                                <a href="view.php?id=<?php echo $client['idCliente']; ?>" class="text-green-500 hover:underline ml-4">Ver Detalles</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

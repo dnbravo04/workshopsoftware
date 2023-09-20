@@ -65,7 +65,7 @@ class AdminController
             $result = $this->createAdmin($data);
 
             if ($result) {
-                header('Location: index.php?action=controller&controller=admin&action=index');
+                header('Location: index.php');
             } else {
                 echo "Error al crear el administrador";
             }

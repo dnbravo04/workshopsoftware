@@ -39,6 +39,16 @@ CREATE TABLE `mecanico` (
   `MecEspecializacion` varchar(30) NOT NULL COMMENT 'Area de especializacion del mecanico'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE `cliente` (
+  `idCliente` int(11) NOT NULL COMMENT 'Llave Primaria',
+  `CliDocumento` bigint(20) NOT NULL COMMENT 'Documento de identidad del cliente',
+  `CliNombre` varchar(30) NOT NULL COMMENT 'Nombre(s) del Cliente',
+  `CliApellido` varchar(30) NOT NULL COMMENT 'Apellidos del Cliente',
+  `CliTelefono` varchar(15) NOT NULL COMMENT 'Telefono principal del cliente',
+  `CliTelefonoSecundario` varchar(15) DEFAULT NULL COMMENT 'Telefono secundario del cliente (Opcional)',
+  `CliCorreo` varchar(40) DEFAULT NULL COMMENT 'Correo Electronico del cliente',
+  `CliDireccion` varchar(80) NOT NULL COMMENT 'Direccion de la casa/oficina del cliente'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `motocicleta` (
   `idMotocicleta` int(11) NOT NULL COMMENT 'Llave Primaria',
@@ -50,6 +60,18 @@ CREATE TABLE `motocicleta` (
   `MtCliente` int(11) NOT NULL COMMENT 'Cliente de la motocicleta. Hace referencia a la columna idCliente de la tabla Cliente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idCliente`),
+  ADD UNIQUE KEY `Documento_Unique_Index` (`CliDocumento`) USING BTREE;
+
+ALTER TABLE `motocicleta`
+  ADD PRIMARY KEY (`idMotocicleta`),
+  ADD UNIQUE KEY `Placa_Unique_Index` (`MtPlaca`) USING BTREE,
+  ADD KEY `Motocicleta_Cliente_FK` (`MtCliente`);
+
+ALTER TABLE `motocicleta`
+  ADD CONSTRAINT `motocicleta_ibfk_1` FOREIGN KEY (`MtCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 CREATE TABLE `reporte_mantenimiento` (
   `idReporte` int(11) NOT NULL COMMENT 'Llave Primaria',
   `RepFecha` date NOT NULL COMMENT 'Fecha en la que se realiza el reporte de mantenimineto',
@@ -60,6 +82,7 @@ CREATE TABLE `reporte_mantenimiento` (
   `RepMecanicoEncargado` int(11) NOT NULL COMMENT 'Mecanico que realizo el mantenimiento. Esta hace referencia a la tabla idMecanico de la tabla Mecanico',
   `RepRepuestosUtilizados` int(11) NOT NULL COMMENT 'Repuestos utilizados durante la reparacion de la motocicleta. Esta hace referencia a la columna idRepuesto de la tabla RepuestoMotocicleta'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 CREATE TABLE `repuestos_motocicleta` (
   `idRepuesto` int(11) NOT NULL COMMENT 'Llave Foranea',

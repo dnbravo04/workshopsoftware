@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../models/ClientModel.php';
+include '../../models/ClientModel.php';
 
 class ClientController
 {

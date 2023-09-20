@@ -13,9 +13,16 @@
     <?php
     include '../shared/header.php';
     include '../../controllers/ClientController.php';
+    $clientController = new ClientController();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $clientController->create();
+    }
     ?>
     <div class="container mx-auto mt-10">
+
         <h2 class="text-2xl font-semibold mb-4">Crear Cliente</h2>
+
+
         <form action="" method="POST">
             <div class="mb-4">
                 <label for="CliDocumento" class="block text-gray-700">Documento:</label>
@@ -54,6 +61,7 @@
     </div>
 
     <?php include '../shared/footer.php'; ?>
+
 </body>
 
 </html>
