@@ -17,20 +17,24 @@
 
     $clientController = new ClientController();
 
-    // Verificar si se recibió el parámetro 'id' en la URL
-    if (isset( $_GET['id'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $idCliente = $_GET['id'];
+
+        // Llama a la función para actualizar el cliente
+        $clientController->edit($idCliente);
+    }
+    if (isset($_GET['id'])) {
         $idCliente =  $_GET['id'];
 
-        // Llama a la función para obtener la información del cliente por su ID
         $cliente = $clientController->getClientById($idCliente);
 
-        // Verifica si se encontró el cliente
+
         if ($cliente != null) {
     ?>
             <div class="container mx-auto mt-10">
                 <h2 class="text-2xl font-semibold mb-4">Editar Cliente</h2>
                 <form action="" method="POST">
-                    <!-- Campo oculto para almacenar el idCliente -->
+
                     <input type="hidden" name="idCliente" value="<?php echo $cliente['idCliente']; ?>">
                     <div class="mb-4">
                         <label for="CliDocumento" class="block text-gray-700">Documento:</label>

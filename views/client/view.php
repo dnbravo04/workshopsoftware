@@ -26,17 +26,56 @@
             if ($client !== null) {
                 // Muestra la información del cliente
         ?>
+                <h2 class="text-center text-4xl font-bold">Datos del Cliente</h2>
                 <div class="container mx-auto mt-10">
-                    <h2 class="text-2xl font-semibold mb-4">Datos del Cliente</h2>
-                    <p><strong>ID del Cliente:</strong> <?php echo $client['idCliente']; ?></p>
-                    <p><strong>Documento:</strong> <?php echo $client['CliDocumento']; ?></p>
-                    <p><strong>Nombre:</strong> <?php echo $client['CliNombre']; ?></p>
-                    <p><strong>Apellido:</strong> <?php echo $client['CliApellido']; ?></p>
-                    <p><strong>Teléfono:</strong> <?php echo $client['CliTelefono']; ?></p>
-                    <p><strong>Teléfono Secundario:</strong> <?php echo $client['CliTelefonoSecundario']; ?></p>
-                    <p><strong>Correo:</strong> <?php echo $client['CliCorreo']; ?></p>
-                    <p><strong>Dirección:</strong> <?php echo $client['CliDireccion']; ?></p>
+                    <div class="flex-row justify-content: center">
+                        <div class="w-full max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-5">
+                            <div class="flex-col">
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">ID del Cliente:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['idCliente']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Documento:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliDocumento']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Nombre:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliNombre']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Apellido:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliApellido']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Teléfono:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliTelefono']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Teléfono Secundario:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliTelefonoSecundario']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Correo:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliCorreo']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Dirección:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliDireccion']; ?></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
         <?php
             } else {
                 // Si el cliente no se encontró, muestra un mensaje de error

@@ -56,7 +56,7 @@ class ClientModel
 
     public function update()
     {
-        $sql = "UPDATE cliente SET CliDocumento = ?, CliNombre = ?, CliApellido = ?, CliTelefono = ?, CliTelefonoSecundario = ?, CliCorreo = ?, CliDireccion = ? WHERE idCliente = ?";
+        $sql = "UPDATE cliente SET CliDocumento = ?, CliNombre = ?, CliApellido = ?, CliTelefono = ?, CliTelefonoSecundario = ?, CliCorreo = ?, CliDireccion = ? WHERE cliente.idCliente = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->CliDocumento, $this->CliNombre, $this->CliApellido, $this->CliTelefono, $this->CliTelefonoSecundario, $this->CliCorreo, $this->CliDireccion, $this->idCliente]);
 

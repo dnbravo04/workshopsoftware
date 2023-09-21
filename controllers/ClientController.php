@@ -78,19 +78,41 @@ class ClientController
 
     public function edit($idCliente)
     {
-
         if (empty($idCliente) || !is_numeric($idCliente)) {
             echo "ID de cliente no válido";
             return;
         }
+
         $cliente = $this->getClientById($idCliente);
 
         if ($cliente === null) {
             echo "Cliente no encontrado";
             return;
         }
-        $this->updateClient($cliente);
-        include 'views/client/edit.php';
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $data = [
+                'idCliente' => $idCliente,
+                'CliDocumento' => $_POST['CliDocumento'],
+                'CliNombre' => $_POST['CliNombre'],
+                'CliApellido' => $_POST['CliApellido'],
+                'CliTelefono' => $_POST['CliTelefono'],
+                'CliTelefonoSecundario' => $_POST['CliTelefonoSecundario'],
+                'CliCorreo' => $_POST['CliCorreo'],
+                'CliDireccion' => $_POST['CliDireccion'],
+            ];
+        }
+
+
+        $result = $this->updateClient($data);
+        
+        if ($result!== null) {
+            header('Location: index.php');
+            exit();
+        } else {
+            echo "Error al actualizar el cliente";
+        }
     }
 
     public function updateClient($data)
