@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Cliente</title>
+    <title>Ingresar Mecanico</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="views/styles/styles.css">
 </head>
@@ -19,7 +19,6 @@
     }
     ?>
     <div class="container mx-auto mt-10">
-anicController
         <h2 class="text-2xl font-semibold mb-4">Ingresar Mecanico</h2>
 
 

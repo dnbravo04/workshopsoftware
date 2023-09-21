@@ -20,19 +20,18 @@ class AdminController
         }
     }
 
-    private function getAdminById($id)
+    public function getAdminById($id)
     {
         try {
             return $this->adminModel->find($id);
         } catch (Exception $e) {
-            // Log the exception and return null
             echo $e->getMessage();
             return null;
         }
     }
 
 
-    private function createAdmin($data)
+    public function createAdmin($data)
     {
         try {
             $this->adminModel->AdmDocumento = $data['AdmDocumento'];
@@ -40,10 +39,10 @@ class AdminController
             $this->adminModel->AdmApellido = $data['AdmApellido'];
             $this->adminModel->AdmTelefono = $data['AdmTelefono'];
             $this->adminModel->AdmCorreo = $data['AdmCorreo'];
-
+            $this->adminModel->AdmUsuario = $data['AdmUsuario'];
+            $this->adminModel->AdmContraseña = $data['AdmContraseña'];
             return $this->adminModel->save();
         } catch (Exception $e) {
-            // Log the exception and return false
             echo $e->getMessage();
             return false;
         }
@@ -64,7 +63,7 @@ class AdminController
 
             $result = $this->createAdmin($data);
 
-            if ($result) {
+            if ($result !== null) {
                 header('Location: index.php');
             } else {
                 echo "Error al crear el administrador";
@@ -84,8 +83,25 @@ class AdminController
             echo "Administrador no encontrado";
             return;
         }
-        $this->updateAdmin($admin);
-        include 'views/admin/edit.php';
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'idAdministrador' => $idAdmin,
+                'AdmDocumento' => $_POST['AdmDocumento'],
+                'AdmNombre' => $_POST['AdmNombre'],
+                'AdmApellido' => $_POST['AdmApellido'],
+                'AdmTelefono' => $_POST['AdmTelefono'],
+                'AdmCorreo' => $_POST['AdmCorreo'],
+                'AdmUsuario' => $_POST['AdmUsuario'],
+                'AdmContraseña' => $_POST['AdmContraseña']
+            ];
+        }
+        $result = $this->updateAdmin($data);
+        if ($result !== null) {
+            header('Location: index.php');
+        } else {
+            echo "Error al actualizar el administrador";
+        }
     }
 
 
@@ -105,11 +121,11 @@ class AdminController
             return $this->adminModel->update();
         } catch (Exception $e) {
             echo $e->getMessage();
-            return false;
+            return 0;
         }
     }
 
-    private function deleteAdmin($idAdmin)
+    public function deleteAdmin($idAdmin)
     {
         try {
             $this->adminModel->idAdministrador = $idAdmin;

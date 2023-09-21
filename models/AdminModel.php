@@ -48,7 +48,7 @@ class AdminModel
     {
         $sql = "UPDATE administrador SET AdmDocumento = ?, AdmNombre = ?, AdmApellido = ?, AdmTelefono = ?, AdmCorreo = ?, AdmUsuario = ?, AdmContraseña = ? WHERE idAdministrador = ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$this->AdmDocumento, $this->AdmNombre, $this->AdmApellido, $this->AdmTelefono, $this->AdmCorreo, $this->idAdministrador]);
+        $stmt->execute([$this->AdmDocumento, $this->AdmNombre, $this->AdmApellido, $this->AdmTelefono, $this->AdmCorreo,$this->AdmUsuario,$this->AdmContraseña, $this->idAdministrador]);
 
         return $stmt->rowCount();
     }

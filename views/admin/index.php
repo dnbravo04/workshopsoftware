@@ -29,26 +29,24 @@
                         <th class="w-1/6 text-left py-2 px-4">Apellidos</th>
                         <th class="w-1/6 text-left py-2 px-4">Telefono</th>
                         <th class="w-1/6 text-left py-2 px-4">Correo</th>
-                        <th class="w-1/6 text-left py-2 px-4">Usuario</th>
-                        <th class="w-1/6 text-left py-2 px-4">Contraseña</th>
                         <th class="w-1/6 text-left py-2 px-4">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($admins as $admin): ?>
-                    <tr>
-                        <td class="text-left py-2 py-4"><?php echo $admin['AdmDocumento'] ?></td>
-                        <td class="text-left py-2 py-4"><?php echo $admin['AdmNombre'] ?></td>
-                        <td class="text-left py-2 py-4"><?php echo $admin['AdmApellido'] ?></td>
-                        <td class="text-left py-2 py-4"><?php echo $admin['AdmTelefono'] ?></td>
-                        <td class="text-left py-2 py-4"><?php echo $admin['AdmCorreo'] ?></td>
-                        <td class="text-left py-2 py-4"><?php echo $admin['AdmUsuario'] ?></td>
-                        <td class="text-left py-2 py-4"><?php echo $admin['AdmContraseña'] ?></td>
-                        <td class="text-left py-2 py-4">
-                            <a href="edit.php?id=<?php echo $admin['idAdministrador']; ?>" class="text-blue-500 hover:underline">Editar</a>
-                            <a href="delete.php?id=<?php echo $admin['idAdministrador']; ?>" class="text-red-500 hover:underline ml-4">Eliminar</a>
-                        </td>
-                    </tr>
+                    <?php foreach ($admins as $admin) : ?>
+                        <tr>
+                            <td class="text-left py-2 px-4"><?php echo $admin['AdmDocumento'] ?></td>
+                            <td class="text-left py-2 px-4"><?php echo $admin['AdmNombre'] ?></td>
+                            <td class="text-left py-2 px-4"><?php echo $admin['AdmApellido'] ?></td>
+                            <td class="text-left py-2 px-4"><?php echo $admin['AdmTelefono'] ?></td>
+                            <td class="text-left py-2 px-4"><?php echo $admin['AdmCorreo'] ?></td>
+                            <td class="text-left py-2 px-4">
+                                <a href="edit.php?id=<?php echo $admin['idAdministrador']; ?>" class="text-blue-500 hover:underline">Editar</a>
+                                <a href="delete.php?id=<?php echo $admin['idAdministrador']; ?>" class="text-red-500 hover:underline ml-4">Eliminar</a>
+                                <a href="view.php?id=<?php echo $admin['idAdministrador']; ?>" class="text-green-500 hover:underline ml-4">Detalles</a>
+                            
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
