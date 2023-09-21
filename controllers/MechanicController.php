@@ -78,9 +78,29 @@ class MechanicController
             echo "El mecánico no existe";
             return;
         }
-        $this->updateMechanic($mecanico);
-        include 'views/mechanic/edit.php';
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'idMecanico' => $idMecanico,
+                'MecDocumento' => $_POST['MecDocumento'],
+                'MecNombre' => $_POST['MecNombre'],
+                'MecApellido' => $_POST['MecApellido'],
+                'MecTelefono' => $_POST['MecTelefono'],
+                'MecCorreo' => $_POST['MecCorreo'],
+                'MecEspecializacion' => $_POST['MecEspecializacion']
+            ];
+        }
+        $result = $this->updateMechanic($data);
+        if ($result !== null) {
+            header('Location: index.php');
+            exit();
+        } else {
+            echo "Error al actualizar el mecánico";
+        }
     }
+
+
     public function updateMechanic($data)
     {
         try {
@@ -94,7 +114,7 @@ class MechanicController
             return $this->mechanicModel->update();
         } catch (Exception $e) {
             echo $e->getMessage();
-            return null;
+            return 0;
         }
     }
 

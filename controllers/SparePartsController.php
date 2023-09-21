@@ -21,10 +21,10 @@ class SparePartsController
             return null;
         }
     }
-    public function getSparePartsById($idRepiesto)
+    public function getSparePartsById($idRepuesto)
     {
         try {
-            $spareParts = $this->sparePartsModel->find($idRepiesto);
+            $spareParts = $this->sparePartsModel->find($idRepuesto);
             return $spareParts;
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -41,7 +41,7 @@ class SparePartsController
             $this->sparePartsModel->RepuMarca = $data['RepuMarca'];
             $this->sparePartsModel->RepuModelo = $data['RepuModelo'];
 
-            return $this->sparePartsModel->save($data);
+            return $this->sparePartsModel->save();
         } catch (Exception $e) {
             echo $e->getMessage();
             return null;
@@ -68,19 +68,36 @@ class SparePartsController
             }
         }
     }
-    public function edit($idRepiesto)
+    public function edit($idRepuesto)
     {
-        if (empty($idRepiesto) || !is_numeric($idRepiesto)) {
+        if (empty($idRepuesto) || !is_numeric($idRepuesto)) {
             echo "ID de repuesto no válido";
             return;
         }
-        $repuesto = $this->getSparePartsById($idRepiesto);
+        $repuesto = $this->getSparePartsById($idRepuesto);
         if ($repuesto === null) {
             echo "Repuesto no encontrado";
             return;
         }
-        $this->updateSpareParts($repuesto);
-        include 'views/spare_parts/edit.php';
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'idRepuesto' => $_POST['idRepuesto'],
+                'RepuCodigo' => $_POST['RepuCodigo'],
+                'RepuNombre' => $_POST['RepuNombre'],
+                'RepuDescripcion' => $_POST['RepuDescripcion'],
+                'RepuTipo' => $_POST['RepuTipo'],
+                'RepuMarca' => $_POST['RepuMarca'],
+                'RepuModelo' => $_POST['RepuModelo'],
+            ];
+            $result = $this->updateSpareParts($data);
+            if ($result !== null) {
+                header('Location: index.php');
+                exit();
+            } else {
+                echo "Error al actualizar el repuesto";
+            }
+        }
     }
     public function updateSpareParts($data)
     {
@@ -98,11 +115,11 @@ class SparePartsController
             return 0;
         }
     }
-    public function deleteSpareParts($idRepiesto)
+    public function deleteSpareParts($idRepuesto)
     {
         try {
-            $this->sparePartsModel->idRepuesto = $idRepiesto;
-            return $this->sparePartsModel->delete($idRepiesto);
+            $this->sparePartsModel->idRepuesto = $idRepuesto;
+            return $this->sparePartsModel->delete($idRepuesto);
         } catch (Exception $e) {
             echo $e->getMessage();
             return false;
@@ -111,8 +128,8 @@ class SparePartsController
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $idRepiesto = $_POST['idRepuesto'];
-            $result = $this->deleteSpareParts($idRepiesto);
+            $idRepuesto = $_POST['idRepuesto'];
+            $result = $this->deleteSpareParts($idRepuesto);
             if ($result) {
 
                 header('Location: index.php');

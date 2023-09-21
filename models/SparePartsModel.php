@@ -43,7 +43,7 @@ class SparePartsModel
 
     public function update()
     {
-        $sql = "UPDATE repuestos_motocicleta SET RepuCoodigo = ?,RepuNombre = ?, RepuDescripcion = ?, RepuTipo = ?, RepuMarca = ?, RepuModelo = ? WHERE idRepuesto = ?";
+        $sql = "UPDATE repuestos_motocicleta SET RepuCodigo = ?,RepuNombre = ?, RepuDescripcion = ?, RepuTipo = ?, RepuMarca = ?, RepuModelo = ? WHERE idRepuesto = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->RepuCodigo, $this->RepuNombre, $this->RepuDescripcion, $this->RepuTipo, $this->RepuMarca, $this->RepuModelo, $this->idRepuesto]);
 

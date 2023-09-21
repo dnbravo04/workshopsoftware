@@ -25,7 +25,6 @@
                     <tr>
                         <th class="w-1/6 text-left py-2 px-4">Codigo</th>
                         <th class="w-1/6 text-left py-2 px-4">Nombre</th>
-                        <th class="w-1/6 text-left py-2 px-4">Descripción</th>
                         <th class="w-1/6 text-left py-2 px-4">Tipo</th>
                         <th class="w-1/6 text-left py-2 px-4">Marca</th>
                         <th class="w-1/6 text-left py-2 px-4">Modelo</th>
@@ -37,13 +36,13 @@
                         <tr>
                             <td class="text-left py-2 px-4"><?php echo $sparePart['RepuCodigo'] ?></td>
                             <td class="text-left py-2 px-4"><?php echo $sparePart['RepuNombre'] ?></td>
-                            <td class="text-left py-2 px-4"><?php echo $sparePart['RepuDescripcion'] ?></td>
                             <td class="text-left py-2 px-4"><?php echo $sparePart['RepuTipo'] ?></td>
                             <td class="text-left py-2 px-4"><?php echo $sparePart['RepuMarca'] ?></td>
                             <td class="text-left py-2 px-4"><?php echo $sparePart['RepuModelo'] ?></td>
                             <td class="text-left py-2 px-4">
                                 <a href="edit.php?id=<?php echo $sparePart['idRepuesto'] ?>" class="text-blue-500 hover:underline">Editar</a>
                                 <a href="delete.php?id=<?php echo $sparePart['idRepuesto'] ?>" class="text-red-500 hover:underline ml-4">Eliminar</a>
+                                <a href="view.php?id=<?php echo $sparePart['idRepuesto'] ?>" class="text-green-500 hover:underline ml-4">Detalles</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -44,7 +44,7 @@ class MechanicModel
 
     public function update()
     {
-        $sql = "UPDATE mecanico SET MecDocumento = ?, MecNombre = ?, MecApellido = ?, MecTelefono = ?, MecCorreo = ?, MecEspecializacion = ? WHERE idMecanico = ?";
+        $sql = "UPDATE mecanico SET MecDocumento = ?, MecNombre = ?, MecApellido = ?, MecTelefono = ?, MecCorreo = ?, MecEspecializacion = ? WHERE mecanico.idMecanico = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$this->MecDocumento, $this->MecNombre, $this->MecApellido, $this->MecTelefono, $this->MecCorreo, $this->MecEspecializacion, $this->idMecanico]);
 

@@ -19,13 +19,10 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idCliente = $_GET['id'];
-
-        // Llama a la función para actualizar el cliente
         $clientController->edit($idCliente);
     }
     if (isset($_GET['id'])) {
         $idCliente =  $_GET['id'];
-
         $cliente = $clientController->getClientById($idCliente);
 
 
