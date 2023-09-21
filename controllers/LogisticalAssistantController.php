@@ -21,10 +21,10 @@ class LogisticalAssistantController
         }
     }
 
-    public function getLogisticalAssistantById($idLogisticalAssistant)
+    public function getLogisticalAssistantById($idAsistLogistico)
     {
         try {
-            return $this->LogisticalAssistantModel->find($idLogisticalAssistant);
+            return $this->LogisticalAssistantModel->find($idAsistLogistico);
         } catch (Exception $e) {
             error_log($e->getMessage());
             return null;
@@ -68,34 +68,53 @@ class LogisticalAssistantController
     }
 
 
-    public function edit($idLogisticalAssistant)
+    public function edit($idAsistLogistico)
     {
-        // Obtener los datos del asistente logístico que se va a editar
-        if (empty($idLogisticalAssistant) || !is_numeric($idLogisticalAssistant)) { {
+
+
+        if (empty($idAsistLogistico) || !is_numeric($idAsistLogistico)) {
                 echo "ID de asistente logístico no válido";
                 return;
             }
-            $LogisticalAssistant = $this->getLogisticalAssistantById($idLogisticalAssistant);
-            // Aquí puedes cargar una vista con un formulario para editar los datos del asistente logístico.
+
+            $LogisticalAssistant = $this->getLogisticalAssistantById($idAsistLogistico);
+
             if ($LogisticalAssistant === null) {
                 echo "Asistente logístico no encontrado";
                 return;
             }
-            $this->updateLogisticalAssistant($LogisticalAssistant);
-            include 'views/LogisticalAssistant/edit.php';
-        }
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $data = [
+                    'idAsistLogistico' => $idAsistLogistico,
+                    'ALDocumento' => $_POST['ALDocumento'],
+                    'ALNombre' => $_POST['ALNombre'],
+                    'ALApellido' => $_POST['ALApellido'],
+                    'ALTelefono' => $_POST['ALTelefono'],
+                    'ALCorreo' => $_POST['ALCorreo'],
+                ];
+            }
+            $result = $this->updateLogisticalAssistant($data);
+
+            if ($result !== null) {
+                header('Location: index.php');
+                exit();
+            } else {
+                echo "Error al actualizar el asistente logístico";
+            }
+    
     }
 
 
-    public function updateLogisticalAssistant($id)
+    public function updateLogisticalAssistant($data)
     {
         try {
-            $this->LogisticalAssistantModel->idAsistLogistico = $id['idAsistLogistico'];
-            $this->LogisticalAssistantModel->ALDocumento = $id['ALDocumento'];
-            $this->LogisticalAssistantModel->ALNombre = $id['ALNombre'];
-            $this->LogisticalAssistantModel->ALApellido = $id['ALApellido'];
-            $this->LogisticalAssistantModel->ALTelefono = $id['ALTelefono'];
-            $this->LogisticalAssistantModel->ALCorreo = $id['ALCorreo'];
+            $this->LogisticalAssistantModel->idAsistLogistico = $data['idAsistLogistico'];
+            $this->LogisticalAssistantModel->ALDocumento = $data['ALDocumento'];
+            $this->LogisticalAssistantModel->ALNombre = $data['ALNombre'];
+            $this->LogisticalAssistantModel->ALApellido = $data['ALApellido'];
+            $this->LogisticalAssistantModel->ALTelefono = $data['ALTelefono'];
+            $this->LogisticalAssistantModel->ALCorreo = $data['ALCorreo'];
 
             return $this->LogisticalAssistantModel->update();
         } catch (Exception $e) {
@@ -104,10 +123,10 @@ class LogisticalAssistantController
         }
     }
 
-    public function deleteLogisticalAssistant($idLogisticalAssistant)
+    public function deleteLogisticalAssistant($idAsistLogistico)
     {
         try {
-            $this->LogisticalAssistantModel->idAsistLogistico = $idLogisticalAssistant;
+            $this->LogisticalAssistantModel->idAsistLogistico = $idAsistLogistico;
             return $this->LogisticalAssistantModel->delete();
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -116,11 +135,10 @@ class LogisticalAssistantController
     }
     public function delete()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $idLogisticalAssistant = $_POST['idLogisticalAssistant'];
-            $result = $this->deleteLogisticalAssistant($idLogisticalAssistant);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $idAsistLogistico = $_POST['idAsistLogistico'];
+            $result = $this->deleteLogisticalAssistant($idAsistLogistico);
             if ($result) {
-                // La eliminación se realizó correctamente, puedes redirigir a otra página o mostrar un mensaje de éxito.
                 header('Location: index.php');
                 exit();
             } else {

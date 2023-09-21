@@ -19,8 +19,6 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idMecanico = $_GET['id'];
-
-        // Llama a la función para actualizar el mecánico
         $mechanicController->edit($idMecanico);
     }
     if (isset($_GET['id'])) {
