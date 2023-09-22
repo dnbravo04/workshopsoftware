@@ -60,27 +60,4 @@ class MaintenanceReportModel
 
         return $stmt->rowCount();
     }
-
-    public function getMotocicleta()
-    {
-        $motocicleta = MotorbikeModel::find($this->RepMotocicleta);
-        return $motocicleta;
-    }
-
-    public function getMecanicoEncargado()
-    {
-        $mecanico = MechanicModel::find($this->RepMecanicoEncargado);
-        return $mecanico;
-    }
-
-    public function getRepuestosUtilizados()
-    {
-        $repuestos = [];
-        $repuestosUtilizados = explode(",", $this->RepRepuestosUtilizados);
-        foreach ($repuestosUtilizados as $idRepuesto) {
-            $repuesto = SpareParts::find($idRepuesto);
-            $repuestos[] = $repuesto;
-        }
-        return $repuestos;
-    }
 }

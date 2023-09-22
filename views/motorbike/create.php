@@ -37,7 +37,6 @@
                 <label for="MtPlaca" class="block text-gray-700">Placa:</label>
                 <input type="text" id="MtPlaca" name="MtPlaca" class="w-full border border-gray-300 rounded p-2" required>
             </div>
-            <!-- Agrega más campos según tus necesidades (Marca, Modelo, Cilindraje, Color, Cliente, etc.) -->
             <div class="mb-4">
                 <label for="MtMarca" class="block text-gray-700">Marca:</label>
                 <input type="text" id="MtMarca" name="MtMarca" class="w-full border border-gray-300 rounded p-2" required>

@@ -1,107 +1,273 @@
 <?php
+
+include_once '../../models/MaintenanceReportModel.php';
+include_once 'MechanicController.php';
+include_once 'SparePartsController.php';
+include_once 'MotorbikeController.php';
+
 class MaintenanceReportController
 {
-    public function index()
-    {
-        // Lógica para mostrar la lista de reportes de mantenimiento
-        $maintenanceReportModel = new MaintenanceReportModel();
-        $maintenanceReports = $maintenanceReportModel->getAll(); // Asegúrate de tener un método getAll en tu modelo
+    private  $maintenanceReportModel;
+    private  $mechanicController;
+    private  $sparePartsController;
+    private  $motorbikeController;
 
-        // Puedes cargar la vista correspondiente y pasar los datos de los reportes a la vista
-        include 'views/maintenancereport/index.php';
+    public function __construct()
+    {
+        $this->maintenanceReportModel = new MaintenanceReportModel();
+        $this->mechanicController = new MechanicController();
+        $this->sparePartsController = new SparePartsController();
+        $this->motorbikeController = new MotorbikeController();
     }
+
+    public function getAllMaintenanceReports()
+    {
+        try {
+            $maintenanceReports = $this->maintenanceReportModel->getAll();
+            return $maintenanceReports;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getMaintenanceReportById($idReporte)
+    {
+        try {
+            $maintenanceReport = $this->maintenanceReportModel->find($idReporte);
+            return $maintenanceReport;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
 
     public function create()
     {
-        // Lógica para mostrar el formulario de creación de reportes de mantenimiento
-        include 'views/maintenancereport/create.php';
-    }
-
-    public function store()
-    {
-        // Lógica para almacenar un nuevo reporte de mantenimiento en la base de datos
-        // Recuperar los datos del formulario
-        $RepFecha = $_POST['RepFecha'];
-        $RepInformeDiagnostico = $_POST['RepInformeDiagnostico'];
-        $RepMantenimientoRealizado = $_POST['RepMantenimientoRealizado'];
-        $RepTiempoReparacion = $_POST['RepTiempoReparacion'];
-        $RepMotocicleta = $_POST['RepMotocicleta'];
-        $RepMecanicoEncargado = $_POST['RepMecanicoEncargado'];
-        $RepRepuestosUtilizados = $_POST['RepRepuestosUtilizados'];
-
-        // Crear una instancia del modelo y guardar los datos
-        $maintenanceReportModel = new MaintenanceReportModel();
-        $maintenanceReportModel->RepFecha = $RepFecha;
-        $maintenanceReportModel->RepInformeDiagnostico = $RepInformeDiagnostico;
-        $maintenanceReportModel->RepMantenimientoRealizado = $RepMantenimientoRealizado;
-        $maintenanceReportModel->RepTiempoReparacion = $RepTiempoReparacion;
-        $maintenanceReportModel->RepMotocicleta = $RepMotocicleta;
-        $maintenanceReportModel->RepMecanicoEncargado = $RepMecanicoEncargado;
-        $maintenanceReportModel->RepRepuestosUtilizados = $RepRepuestosUtilizados;
-
-        if ($maintenanceReportModel->save()) {
-            // Redirigir o mostrar un mensaje de éxito
-            header('Location: index.php');
-        } else {
-            // Mostrar un mensaje de error
-            echo 'Error al guardar el reporte de mantenimiento.';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'RepFecha' => $_POST['RepFecha'],
+                'RepInformeDiagnostico' => $_POST['RepInformeDiagnostico'],
+                'RepMantenimientoRealizado' => $_POST['RepMantenimientoRealizado'],
+                'RepTiempoReparacion' => $_POST['RepTiempoReparacion'],
+                'RepMotocicleta' => $_POST['RepMotocicleta'],
+                'RepMecanicoEncargado' => $_POST['RepMecanicoEncargado'],
+                'RepRepuestosUtilizados' => $_POST['RepRepuestosUtilizados'],
+            ];
+            $result = $this->createMaintenanceReport($data);
+            if ($result !== null) {
+                header('Location: index.php');
+                exit();
+            } else {
+                echo "Error al crear el reporte";
+            }
         }
     }
 
-    public function edit($id)
+    public function createMaintenanceReport($data)
     {
-        // Lógica para mostrar el formulario de edición de un reporte de mantenimiento
-        $maintenanceReportModel = new MaintenanceReportModel();
-        $maintenanceReport = $maintenanceReportModel->find($id);
-
-        // Puedes cargar la vista correspondiente y pasar los datos del reporte a la vista
-        include 'views/maintenancereport/edit.php';
-    }
-
-    public function update($id)
-    {
-        // Lógica para actualizar los datos de un reporte de mantenimiento en la base de datos
-        // Recuperar los datos del formulario
-        $RepFecha = $_POST['RepFecha'];
-        $RepInformeDiagnostico = $_POST['RepInformeDiagnostico'];
-        $RepMantenimientoRealizado = $_POST['RepMantenimientoRealizado'];
-        $RepTiempoReparacion = $_POST['RepTiempoReparacion'];
-        $RepMotocicleta = $_POST['RepMotocicleta'];
-        $RepMecanicoEncargado = $_POST['RepMecanicoEncargado'];
-        $RepRepuestosUtilizados = $_POST['RepRepuestosUtilizados'];
-
-        // Crear una instancia del modelo y actualizar los datos
-        $maintenanceReportModel = new MaintenanceReportModel();
-        $maintenanceReportModel->idReporte = $id;
-        $maintenanceReportModel->RepFecha = $RepFecha;
-        $maintenanceReportModel->RepInformeDiagnostico = $RepInformeDiagnostico;
-        $maintenanceReportModel->RepMantenimientoRealizado = $RepMantenimientoRealizado;
-        $maintenanceReportModel->RepTiempoReparacion = $RepTiempoReparacion;
-        $maintenanceReportModel->RepMotocicleta = $RepMotocicleta;
-        $maintenanceReportModel->RepMecanicoEncargado = $RepMecanicoEncargado;
-        $maintenanceReportModel->RepRepuestosUtilizados = $RepRepuestosUtilizados;
-
-        if ($maintenanceReportModel->update()) {
-            // Redirigir o mostrar un mensaje de éxito
-            header('Location: index.php');
-        } else {
-            // Mostrar un mensaje de error
-            echo 'Error al actualizar el reporte de mantenimiento.';
+        try {
+            $this->maintenanceReportModel->RepFecha = $data['RepFecha'];
+            $this->maintenanceReportModel->RepInformeDiagnostico = $data['RepInformeDiagnostico'];
+            $this->maintenanceReportModel->RepMantenimientoRealizado = $data['RepMantenimientoRealizado'];
+            $this->maintenanceReportModel->RepTiempoReparacion = $data['RepTiempoReparacion'];
+            $this->maintenanceReportModel->RepMotocicleta = $data['RepMotocicleta'];
+            $this->maintenanceReportModel->RepMecanicoEncargado = $data['RepMecanicoEncargado'];
+            $this->maintenanceReportModel->RepRepuestosUtilizados = $data['RepRepuestosUtilizados'];
+            return $this->maintenanceReportModel->save();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
         }
     }
 
-    public function delete($id)
+    public function edit($idReporteMantenimiento)
     {
-        // Lógica para eliminar un reporte de mantenimiento de la base de datos
-        $maintenanceReportModel = new MaintenanceReportModel();
-        $maintenanceReportModel->idReporte = $id;
+        if (empty($idReporteMantenimiento) || !is_numeric($idReporteMantenimiento)) {
+            echo "ID de reporte de mantenimiento no válido";
+            return;
+        }
+        $report = $this->getMaintenanceReportById($idReporteMantenimiento);
+        if ($report === null) {
+            echo "Reporte de mantenimiento no encontrado";
+            return;
+        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'idReporte' => $_POST['idReporte'],
+                'RepFecha' => $_POST['RepFecha'],
+                'RepInformeDiagnostico' => $_POST['RepInformeDiagnostico'],
+                'RepMantenimientoRealizado' => $_POST['RepMantenimientoRealizado'],
+                'RepTiempoReparacion' => $_POST['RepTiempoReparacion'],
+                'RepMotocicleta' => $_POST['RepMotocicleta'],
+                'RepMecanicoEncargado' => $_POST['RepMecanicoEncargado'],
+                'RepRepuestosUtilizados' => $_POST['RepRepuestosUtilizados']
+            ];
+            $result = $this->updateMaintenanceReport($data);
+            if ($result !== null) {
+                header('Location: index.php');
+                exit();
+            } else {
+                echo "Error al actualizar el reporte";
+            }
+        }
+    }
 
-        if ($maintenanceReportModel->delete()) {
-            // Redirigir o mostrar un mensaje de éxito
-            header('Location: index.php');
-        } else {
-            // Mostrar un mensaje de error
-            echo 'Error al eliminar el reporte de mantenimiento.';
+
+    public function updateMaintenanceReport($data)
+    {
+        echo $data;
+        try {
+            $this->maintenanceReportModel->idReporte = $data['idReporte'];
+            $this->maintenanceReportModel->RepFecha = $data['RepFecha'];
+            $this->maintenanceReportModel->RepInformeDiagnostico = $data['RepInformeDiagnostico'];
+            $this->maintenanceReportModel->RepMantenimientoRealizado = $data['RepMantenimientoRealizado'];
+            $this->maintenanceReportModel->RepTiempoReparacion = $data['RepTiempoReparacion'];
+            $this->maintenanceReportModel->RepMotocicleta = $data['RepMotocicleta'];
+            $this->maintenanceReportModel->RepMecanicoEncargado = $data['RepMecanicoEncargado'];
+            $this->maintenanceReportModel->RepRepuestosUtilizados = $data['RepRepuestosUtilizados'];
+            return $this->maintenanceReportModel->update();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function delete()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $idReporteMantenimiento = $_POST['idReporte'];
+            $result = $this->deleteMaintenanceReport($idReporteMantenimiento);
+            if ($result) {
+                header('Location: index.php');
+                exit();
+            } else {
+                echo "Error al eliminar el reporte";
+            }
+        }
+    }
+
+    public function deleteMaintenanceReport($idReporte)
+    {
+        try {
+            $this->maintenanceReportModel->idReporte = $idReporte;
+            return $this->maintenanceReportModel->delete();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+
+    public function showMotorbikeByMaintenanceReport($idReporte)
+    {
+        try {
+            $maintenanceReport = $this->maintenanceReportModel->find($idReporte);
+            if ($maintenanceReport === null) {
+                return null;
+            }
+            $motorbike = $this->getMotorbikeByMaintenanceReport($maintenanceReport);
+            return $motorbike !== null ? [
+                'idMotocicleta' => $motorbike['idMotocicleta'],
+                'MtMarca' => $motorbike['MtMarca'],
+                'MtModelo' => $motorbike['MtModelo'],
+                'MtColor' => $motorbike['MtColor'],
+                'MtPlaca' => $motorbike['MtPlaca'],
+            ] : null;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getMotorbikeByMaintenanceReport($maintenanceReport)
+    {
+
+        $motorbikeId = intval($maintenanceReport['RepMotocicleta']);
+        return $this->motorbikeController->getMotorbikeById($motorbikeId);
+    }
+
+    public function showMechanicByMaintenanceReport($idReporte)
+    {
+        try {
+            $maintenanceReport = $this->maintenanceReportModel->find($idReporte);
+            if ($maintenanceReport === null) {
+                return null;
+            }
+            $mechanic = $this->getMechanicByMaintenanceReport($maintenanceReport);
+            return $mechanic !== null ? [
+                'idMecanico' => $mechanic['idMecanico'],
+                'MecNombre' => $mechanic['MecNombre'],
+                'MecApellido' => $mechanic['MecApellido'],
+                'MecEspecializacion' => $mechanic['MecEspecializacion'],
+            ] : null;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getMechanicByMaintenanceReport($idReporte)
+    {
+        $mechanicId = intval($idReporte['RepMecanicoEncargado']);
+        return $this->mechanicController->getMechanicById($mechanicId);
+    }
+
+    public function showSparePartsByMaintenanceReport($idReporte)
+    {
+        try {
+            $maintenanceReport = $this->maintenanceReportModel->find($idReporte);
+            if ($maintenanceReport === null) {
+                return null;
+            }
+            $spareParts = $this->getSparePartsByMaintenanceReport($maintenanceReport);
+            return $spareParts !== null ? [
+                'idRepuesto' => $spareParts['idRepuesto'],
+                'RepuCodigo' => $spareParts['RepuCodigo'],
+                'RepuNombre' => $spareParts['RepuNombre'],
+                'RepuDescripcion' => $spareParts['RepuDescripcion'],
+                'RepuTipo' => $spareParts['RepuTipo'],
+                'RepuMarca' => $spareParts['RepuMarca'],
+                'RepuModelo' => $spareParts['RepuModelo']
+            ] : null;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getSparePartsByMaintenanceReport($idReporte)
+    {
+        $sparePartsId = intval($idReporte['RepRepuestosUtilizados']);
+        return $this->sparePartsController->getSparePartsById($sparePartsId);
+    }
+
+    public function getAllMotorbikes()
+    {
+        try {
+            return $this->motorbikeController->getAllMotorbikes();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+    public function getAllMechanics()
+    {
+        try {
+            return $this->mechanicController->getAllMechanics();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+    public function getAllSpareParts()
+    {
+        try {
+            return $this->sparePartsController->getAllSpareParts();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
         }
     }
 }

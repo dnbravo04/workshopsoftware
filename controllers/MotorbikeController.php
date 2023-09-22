@@ -94,7 +94,7 @@ class MotorbikeController
                 'MtModelo' => $_POST['MtModelo'],
                 'MtCilindraje' => $_POST['MtCilindraje'],
                 'MtColor' => $_POST['MtColor'],
-                'MtCliente' => $_POST['MtCliente'],
+                'MtCliente' => $_POST['MtCliente']
             ];
             $result = $this->updateMotorbike($data);
             if ($result !== null) {
@@ -172,6 +172,7 @@ class MotorbikeController
         $clientId = intval($motorbike['MtCliente']);
         return $this->clientController->getClientById($clientId);
     }
+    
     public function getAllClients()
     {
         try {
