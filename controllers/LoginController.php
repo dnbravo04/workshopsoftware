@@ -1,9 +1,8 @@
 <?php
-include 'c:\xampp\htdocs\workshopsoftware\models\LoginModel.php';
+include_once '../../models/LoginModel.php';
 
 class LoginController
 {
-
     private $loginModel;
 
     public function __construct()
@@ -13,17 +12,21 @@ class LoginController
 
     public function login($username, $password)
     {
-        $user = $this->loginModel->authenticate($username, $password);
+        // Iniciar la sesión antes de trabajar con variables de sesión
+        session_start();
 
-        if ($user) {
-            $_SESSION['user_id'] = $user['id'];
+        $result = $this->loginModel->authenticate($username, $password);
+        if ($result === 'username') {
+            // Usuario incorrecto
+            return 'Nombre de usuario incorrecto';
+        } elseif ($result === 'password') {
+            // Contraseña incorrecta
+            return 'Contraseña incorrecta';
+        } elseif (is_array($result)) {
+            // Autenticación exitosa
+            $_SESSION['user_id'] = $result['idAdministrador'];
             header('Location: ../../views/index.php');
-        } else {
-            $warning = "Nombre de usuario o clave incorrectos.";
-        }
-
-        if (isset($warning)) {
-            echo '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">' . $warning . '</div>';
+            exit();
         }
     }
 
@@ -31,5 +34,6 @@ class LoginController
     {
         session_destroy();
         header('Location: login.php');
+        exit();
     }
 }

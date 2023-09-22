@@ -58,8 +58,8 @@
                         <input type="text" id="AdmUsuario" name="AdmUsuario" class="w-full border border-gray-300 rounded p-2" value="<?php echo $admin['AdmUsuario']; ?>" required>
                     </div>
                     <div class="mb-4">
-                        <label for="AdmContraseña" class="block text-gray-700">Contraseña:</label>
-                        <input type="password" id="AdmContraseña" name="AdmContraseña" class="w-full border border-gray-300 rounded p-2" value="<?php echo $admin['AdmContraseña']; ?>" required>
+                        <label for="AdmContraseña" class="block text-gray-700">Nueva Contraseña:</label>
+                        <input type="password" id="AdmContraseña" name="AdmContraseña" class="w-full border border-gray-300 rounded p-2" placeholder="Ingrese nueva contraseña si desea cambiarla">
                     </div>
                     <div class="mt-4">
                         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">

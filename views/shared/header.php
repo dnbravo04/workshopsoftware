@@ -37,7 +37,7 @@
                 <a href="/workshopsoftware/views/spare_parts/index.php" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white ml-4">
                     Repuestos
                 </a>
-                <a href="/workshopsoftware/views/login/login.php?action=logout" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white ml-4">
+                <a href="/workshopsoftware/views/login/login.php" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white ml-4">
                     Salir
                 </a>
             </div>

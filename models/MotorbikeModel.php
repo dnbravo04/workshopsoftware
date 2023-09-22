@@ -54,11 +54,11 @@ class MotorbikeModel
         return $stmt->rowCount();
     }
 
-    public function find($id)
+    public function find($idMotocicleta)
     {
         $sql = "SELECT * FROM motocicleta WHERE idMotocicleta = ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id]);
+        $stmt->execute([$idMotocicleta]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }

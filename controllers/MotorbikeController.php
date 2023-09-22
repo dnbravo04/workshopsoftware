@@ -1,18 +1,20 @@
 <?php
 
 include_once '../../models/MotorbikeModel.php';
-include '../../models/ClientModel.php';
+include_once 'ClientController.php';
 
 
 class MotorbikeController
 {
     private  $motorbikeModel;
-    private  $clientModel;
+
+    private  $clientController;
 
     public function __construct()
     {
         $this->motorbikeModel = new MotorbikeModel();
-        $this->clientModel = new ClientModel();
+
+        $this->clientController = new ClientController();
     }
     public function getAllMotorbikes()
     {
@@ -24,10 +26,11 @@ class MotorbikeController
             return null;
         }
     }
-    public function getMotorbikeById($idMotorbike)
+
+    public function getMotorbikeById($idMotocicleta)
     {
         try {
-            return $this->motorbikeModel->find($idMotorbike);
+            return $this->motorbikeModel->find($idMotocicleta);
         } catch (Exception $e) {
             error_log($e->getMessage());
             return null;
@@ -72,19 +75,35 @@ class MotorbikeController
     }
 
 
-    public function edit($idMotorbike)
+    public function edit($idMotocicleta)
     {
-        if (empty($idMotorbike) || !is_numeric($idMotorbike)) {
+        if (empty($idMotocicleta) || !is_numeric($idMotocicleta)) {
             echo "ID de motocicleta no válido";
             return;
         }
-        $motorbike = $this->getMotorbikeById($idMotorbike);
+        $motorbike = $this->getMotorbikeById($idMotocicleta);
         if ($motorbike === null) {
             echo "Motocicleta no encontrada";
             return;
         }
-        $this->updateMotorbike($motorbike);
-        include_once 'views/motorbike/edit.php';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'idMotocicleta' => $_POST['idMotocicleta'],
+                'MtPlaca' => $_POST['MtPlaca'],
+                'MtMarca' => $_POST['MtMarca'],
+                'MtModelo' => $_POST['MtModelo'],
+                'MtCilindraje' => $_POST['MtCilindraje'],
+                'MtColor' => $_POST['MtColor'],
+                'MtCliente' => $_POST['MtCliente'],
+            ];
+            $result = $this->updateMotorbike($data);
+            if ($result !== null) {
+                header('Location: index.php');
+                exit();
+            } else {
+                echo "Error al actualizar el cliente";
+            }
+        }
     }
     public function updateMotorbike($data)
     {
@@ -102,10 +121,10 @@ class MotorbikeController
             return 0;
         }
     }
-    public function deleteMotorbike($idMotorbike)
+    public function deleteMotorbike($idMotocicleta)
     {
         try {
-            $this->motorbikeModel->idMotocicleta = $idMotorbike;
+            $this->motorbikeModel->idMotocicleta = $idMotocicleta;
             return $this->motorbikeModel->delete();
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -115,8 +134,8 @@ class MotorbikeController
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $idMotorbike = $_POST['idMotorbike'];
-            $result = $this->deleteMotorbike($idMotorbike);
+            $idMotocicleta = $_POST['idMotocicleta'];
+            $result = $this->deleteMotorbike($idMotocicleta);
             if ($result) {
                 header('Location: index.php');
                 exit();
@@ -127,10 +146,10 @@ class MotorbikeController
             }
         }
     }
-    public function showClientByMotorbike($idMotorbike)
+    public function showClientByMotorbike($idMotocicleta)
     {
         try {
-            $motorbike = $this->motorbikeModel->find($idMotorbike);
+            $motorbike = $this->motorbikeModel->find($idMotocicleta);
 
             if ($motorbike === null) {
                 return null;
@@ -148,9 +167,19 @@ class MotorbikeController
         }
     }
 
-    private function getClientByMotorbike($motorbike)
+    public function getClientByMotorbike($motorbike)
     {
         $clientId = intval($motorbike['MtCliente']);
-        return $this->clientModel->find($clientId);
+        return $this->clientController->getClientById($clientId);
+    }
+    public function getAllClients()
+    {
+        try {
+            $clients = $this->clientController->getAllClients();
+            return $clients;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
     }
 }

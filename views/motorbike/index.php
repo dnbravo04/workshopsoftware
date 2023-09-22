@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes</title>
+    <title>Motocicletas</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -58,6 +58,7 @@
                             <td class="text-left py-2 px-4">
                                 <a href="edit.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="text-blue-500 hover:underline">Editar</a>
                                 <a href="delete.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="text-red-500 hover:underline ml-4">Eliminar</a>
+                                <a href="view.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="text-green-500 hover:underline ml-4">Detalles</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
