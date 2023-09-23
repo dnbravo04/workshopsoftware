@@ -96,6 +96,7 @@
                                 endif; ?>
                             </p>
                             <p class="my-2">
+                                <a class="bg-blue-500 hover:bg-blue-600 text-white font-semibold  py-2 px-4 my-3 rounded" href="Informe-Mantenimiento.php?id=<?php echo $idMaintenanceReport; ?>" target="_blank">Generar PDF</a>
 
                             </p>
 

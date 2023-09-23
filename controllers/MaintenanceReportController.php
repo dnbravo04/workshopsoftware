@@ -4,6 +4,7 @@ include_once '../../models/MaintenanceReportModel.php';
 include_once 'MechanicController.php';
 include_once 'SparePartsController.php';
 include_once 'MotorbikeController.php';
+include_once 'ClientController.php';
 
 class MaintenanceReportController
 {
@@ -11,6 +12,7 @@ class MaintenanceReportController
     private  $mechanicController;
     private  $sparePartsController;
     private  $motorbikeController;
+    private $clientController;
 
     public function __construct()
     {
@@ -18,6 +20,7 @@ class MaintenanceReportController
         $this->mechanicController = new MechanicController();
         $this->sparePartsController = new SparePartsController();
         $this->motorbikeController = new MotorbikeController();
+        $this->clientController = new ClientController();
     }
 
     public function getAllMaintenanceReports()
@@ -159,6 +162,37 @@ class MaintenanceReportController
         }
     }
 
+    public function showClientByMaintenanceReport($idReporte)
+    {
+        try {
+            $maintenanceReport = $this->maintenanceReportModel->find($idReporte);
+            if ($maintenanceReport === null) {
+                return null;
+            }
+
+            $motorbike = $this->motorbikeController->getMotorbikeById($maintenanceReport['RepMotocicleta']);
+            if ($motorbike === null) {
+                return null;
+            }
+
+            $client = $this->clientController->getClientById($motorbike['MtCliente']);
+
+            return $client !== null ? [
+                'idCliente' => $client['idCliente'],
+                'CliDocumento' => $client['CliDocumento'],
+                'CliNombre' => $client['CliNombre'],
+                'CliApellido' => $client['CliApellido'],
+                'CliTelefono' => $client['CliTelefono'],
+                'CliTelefonoSecundario' => $client['CliTelefonoSecundario'],
+                'CliCorreo' => $client['CliCorreo'],
+                'CliDireccion' => $client['CliDireccion']
+            ] : null;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
 
     public function showMotorbikeByMaintenanceReport($idReporte)
     {
@@ -174,6 +208,7 @@ class MaintenanceReportController
                 'MtModelo' => $motorbike['MtModelo'],
                 'MtColor' => $motorbike['MtColor'],
                 'MtPlaca' => $motorbike['MtPlaca'],
+                'MtCilindraje'=> $motorbike['MtCilindraje']
             ] : null;
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -265,6 +300,15 @@ class MaintenanceReportController
     {
         try {
             return $this->sparePartsController->getAllSpareParts();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+    public function getAllClients()
+    {
+        try {
+            return $this->clientController->getAllClients();
         } catch (Exception $e) {
             echo $e->getMessage();
             return null;
