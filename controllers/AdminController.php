@@ -1,5 +1,5 @@
 <?php
-include '../../models/AdminModel.php';
+include 'C:/xampp/htdocs/workshopsoftware/models/AdminModel.php';
 
 class AdminController
 {

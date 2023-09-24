@@ -1,6 +1,6 @@
 <?php
 
-include '../../models/SparePartsModel.php';
+include 'C:/xampp/htdocs/workshopsoftware/models/SparePartsModel.php';
 
 class SparePartsController
 {

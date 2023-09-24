@@ -1,6 +1,6 @@
 <?php
 
-include '../../models/LogisticalAssistantModel.php';
+include 'C:/xampp/htdocs/workshopsoftware/models/LogisticalAssistantModel.php';
 class LogisticalAssistantController
 {
     private $LogisticalAssistantModel;

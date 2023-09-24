@@ -1,6 +1,6 @@
 <?php
 
-include '../../models/ClientModel.php';
+include 'C:/xampp/htdocs/workshopsoftware/models/ClientModel.php';
 
 class ClientController
 {

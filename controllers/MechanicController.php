@@ -1,6 +1,6 @@
 <?php
 
-include '../../models/MechanicModel.php';
+include 'C:/xampp/htdocs/workshopsoftware/models/MechanicModel.php';
 class MechanicController
 {
     private $mechanicModel;

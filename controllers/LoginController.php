@@ -1,5 +1,5 @@
 <?php
-include_once '../../models/LoginModel.php';
+include_once 'C:/xampp/htdocs/workshopsoftware/models/LoginModel.php';
 
 class LoginController
 {
