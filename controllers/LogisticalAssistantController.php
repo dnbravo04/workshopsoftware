@@ -10,43 +10,6 @@ class LogisticalAssistantController
         $this->LogisticalAssistantModel = new LogisticalAssistantModel();
     }
 
-    public function getAllLogisticalAssistants()
-    {
-        try {
-            $clients = $this->LogisticalAssistantModel->getAll();
-            return $clients;
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return [];
-        }
-    }
-
-    public function getLogisticalAssistantById($idAsistLogistico)
-    {
-        try {
-            return $this->LogisticalAssistantModel->find($idAsistLogistico);
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            return null;
-        }
-    }
-
-    public function createLogisticalAssistant($data)
-    {
-        try {
-            $this->LogisticalAssistantModel->ALDocumento = $data['ALDocumento'];
-            $this->LogisticalAssistantModel->ALNombre = $data['ALNombre'];
-            $this->LogisticalAssistantModel->ALApellido = $data['ALApellido'];
-            $this->LogisticalAssistantModel->ALTelefono = $data['ALTelefono'];
-            $this->LogisticalAssistantModel->ALCorreo = $data['ALCorreo'];
-
-            return $this->LogisticalAssistantModel->save();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
-
     public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -67,6 +30,42 @@ class LogisticalAssistantController
         }
     }
 
+    public function createLogisticalAssistant($data)
+    {
+        try {
+            $this->LogisticalAssistantModel->ALDocumento = $data['ALDocumento'];
+            $this->LogisticalAssistantModel->ALNombre = $data['ALNombre'];
+            $this->LogisticalAssistantModel->ALApellido = $data['ALApellido'];
+            $this->LogisticalAssistantModel->ALTelefono = $data['ALTelefono'];
+            $this->LogisticalAssistantModel->ALCorreo = $data['ALCorreo'];
+
+            return $this->LogisticalAssistantModel->save();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getLogisticalAssistantById($idAsistLogistico)
+    {
+        try {
+            return $this->LogisticalAssistantModel->find($idAsistLogistico);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+
+    public function getAllLogisticalAssistants()
+    {
+        try {
+            $clients = $this->LogisticalAssistantModel->getAll();
+            return $clients;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return [];
+        }
+    }
 
     public function edit($idAsistLogistico)
     {
@@ -105,7 +104,6 @@ class LogisticalAssistantController
     
     }
 
-
     public function updateLogisticalAssistant($data)
     {
         try {
@@ -123,16 +121,6 @@ class LogisticalAssistantController
         }
     }
 
-    public function deleteLogisticalAssistant($idAsistLogistico)
-    {
-        try {
-            $this->LogisticalAssistantModel->idAsistLogistico = $idAsistLogistico;
-            return $this->LogisticalAssistantModel->delete();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return false;
-        }
-    }
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -145,4 +133,16 @@ class LogisticalAssistantController
             }
         }
     }
+    
+    public function deleteLogisticalAssistant($idAsistLogistico)
+    {
+        try {
+            $this->LogisticalAssistantModel->idAsistLogistico = $idAsistLogistico;
+            return $this->LogisticalAssistantModel->delete();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+    
 }

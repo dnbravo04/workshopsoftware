@@ -15,13 +15,16 @@ class LogisticalAssistantModel
         $this->db = new PDO("mysql:host=localhost;dbname=workshopsoftware_db", "root", "");
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-    public function getAll()
-    {
-        $sql = "SELECT * FROM asistentelogistico";
-        $stmt = $this->db->query($sql);
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function save()
+    {
+        $sql = "INSERT INTO asistentelogistico (ALDocumento, ALNombre, ALApellido, ALTelefono, ALCorreo) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$this->ALDocumento, $this->ALNombre, $this->ALApellido, $this->ALTelefono, $this->ALCorreo]);
+
+        return $stmt->rowCount();
     }
+
     public function find($idAsistLogistico)
     {
         $sql = "SELECT * FROM asistentelogistico WHERE idAsistLogistico = ?";
@@ -31,13 +34,12 @@ class LogisticalAssistantModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function save()
+    public function getAll()
     {
-        $sql = "INSERT INTO asistentelogistico (ALDocumento, ALNombre, ALApellido, ALTelefono, ALCorreo) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$this->ALDocumento, $this->ALNombre, $this->ALApellido, $this->ALTelefono, $this->ALCorreo]);
+        $sql = "SELECT * FROM asistentelogistico";
+        $stmt = $this->db->query($sql);
 
-        return $stmt->rowCount();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function update()

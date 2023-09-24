@@ -23,29 +23,6 @@ class MaintenanceReportController
         $this->clientController = new ClientController();
     }
 
-    public function getAllMaintenanceReports()
-    {
-        try {
-            $maintenanceReports = $this->maintenanceReportModel->getAll();
-            return $maintenanceReports;
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
-
-    public function getMaintenanceReportById($idReporte)
-    {
-        try {
-            $maintenanceReport = $this->maintenanceReportModel->find($idReporte);
-            return $maintenanceReport;
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
-
-
     public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -85,6 +62,28 @@ class MaintenanceReportController
         }
     }
 
+    public function getMaintenanceReportById($idReporte)
+    {
+        try {
+            $maintenanceReport = $this->maintenanceReportModel->find($idReporte);
+            return $maintenanceReport;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getAllMaintenanceReports()
+    {
+        try {
+            $maintenanceReports = $this->maintenanceReportModel->getAll();
+            return $maintenanceReports;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
     public function edit($idReporteMantenimiento)
     {
         if (empty($idReporteMantenimiento) || !is_numeric($idReporteMantenimiento)) {
@@ -116,7 +115,6 @@ class MaintenanceReportController
             }
         }
     }
-
 
     public function updateMaintenanceReport($data)
     {
@@ -193,7 +191,6 @@ class MaintenanceReportController
         }
     }
 
-
     public function showMotorbikeByMaintenanceReport($idReporte)
     {
         try {
@@ -208,19 +205,12 @@ class MaintenanceReportController
                 'MtModelo' => $motorbike['MtModelo'],
                 'MtColor' => $motorbike['MtColor'],
                 'MtPlaca' => $motorbike['MtPlaca'],
-                'MtCilindraje'=> $motorbike['MtCilindraje']
+                'MtCilindraje' => $motorbike['MtCilindraje']
             ] : null;
         } catch (Exception $e) {
             echo $e->getMessage();
             return null;
         }
-    }
-
-    public function getMotorbikeByMaintenanceReport($maintenanceReport)
-    {
-
-        $motorbikeId = intval($maintenanceReport['RepMotocicleta']);
-        return $this->motorbikeController->getMotorbikeById($motorbikeId);
     }
 
     public function showMechanicByMaintenanceReport($idReporte)
@@ -241,12 +231,6 @@ class MaintenanceReportController
             echo $e->getMessage();
             return null;
         }
-    }
-
-    public function getMechanicByMaintenanceReport($idReporte)
-    {
-        $mechanicId = intval($idReporte['RepMecanicoEncargado']);
-        return $this->mechanicController->getMechanicById($mechanicId);
     }
 
     public function showSparePartsByMaintenanceReport($idReporte)
@@ -278,6 +262,19 @@ class MaintenanceReportController
         return $this->sparePartsController->getSparePartsById($sparePartsId);
     }
 
+    public function getMotorbikeByMaintenanceReport($maintenanceReport)
+    {
+
+        $motorbikeId = intval($maintenanceReport['RepMotocicleta']);
+        return $this->motorbikeController->getMotorbikeById($motorbikeId);
+    }
+
+    public function getMechanicByMaintenanceReport($idReporte)
+    {
+        $mechanicId = intval($idReporte['RepMecanicoEncargado']);
+        return $this->mechanicController->getMechanicById($mechanicId);
+    }
+
     public function getAllMotorbikes()
     {
         try {
@@ -287,6 +284,7 @@ class MaintenanceReportController
             return null;
         }
     }
+
     public function getAllMechanics()
     {
         try {
@@ -296,6 +294,7 @@ class MaintenanceReportController
             return null;
         }
     }
+
     public function getAllSpareParts()
     {
         try {
@@ -305,6 +304,7 @@ class MaintenanceReportController
             return null;
         }
     }
+
     public function getAllClients()
     {
         try {

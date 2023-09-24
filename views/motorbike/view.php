@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motocicletas</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a09d03aeb8.js" crossorigin="anonymous"></script>
+    <title>Detalles de la Motocicleta</title>
 </head>
 
-<body>
+<body class="dark:text-white dark:bg-gray-800">
     <?php
     include '../shared/header.php';
     include '../../controllers/MotorbikeController.php';
@@ -19,68 +20,104 @@
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $idMotocicleta = $_GET['id'];
         $motorbike = $motorbikecontroller->getMotorbikeById($idMotocicleta);
+        $client = $motorbikecontroller->showClientByMotorbike($motorbike['idMotocicleta']);
 
 
         if ($motorbike !== null) {
 
     ?>
-            <h2 class="text-center text-4xl font-bold">Datos de la motocicleta</h2>
-            <div class="container mx-auto mt-10">
+            <div class="container mx-auto mt-5">
                 <div class="flex-row justify-content: center">
-                    <div class="w-full max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-5">
+                    <div class="w-full max-w-6xl dark:bg-gray-700 mx-auto bg-white rounded-lg shadow-lg p-5">
                         <div class="flex-col">
                             <p class="my-2">
-                                <strong class="text-base font-bold">ID de la motocicleta:</strong>
+                                <strong class="text-4xl font-bold"><?php echo $motorbike['MtPlaca']  ?></strong>
                                 <br>
-                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['idMotocicleta']; ?></span>
+                                <span class="text-xl pt-2">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtMarca'] . ' - ' . $motorbike['MtModelo'] ?></span>
                             </p>
-                            <p class="my-2">
-                                <strong class="text-base font-bold">Placa:</strong>
-                                <br>
-                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtPlaca']; ?></span>
-                            </p>
-                            <p class="my-2">
-                                <strong class="text-base font-bold">Marca:</strong>
-                                <br>
-                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtMarca']; ?></span>
-                            </p>
-                            <p class="my-2">
-                                <strong class="text-base font-bold">Modelo:</strong>
-                                <br>
-                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtModelo']; ?></span>
-                            </p>
-                            <p class="my-2">
-                                <strong class="text-base font-bold">Cilindraje:</strong>
-                                <br>
-                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtCilindraje']; ?></span>
-                            </p>
-                            <p class="my-2">
-                                <strong class="text-base font-bold">Color:</strong>
-                                <br>
-                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtColor']; ?></span>
-                            </p>
-                            <?php
-                            $clientData = $motorbikecontroller->showClientByMotorbike($motorbike['idMotocicleta']);
-                            if ($clientData !== null) :
-                                echo '<p class="my-2">
-                                    <strong class="text-base font-bold">Cliente:</strong>
+                        </div>
+                    </div>
+                    <div class="w-full max-w-6xl dark:bg-gray-700 mx-auto my-3 bg-white rounded-lg shadow-lg p-5">
+                        <h2 class="text-center text-xl font-bold">Información Completa de la Motocicleta</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="col-span-1">
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">ID interna de la motocicleta:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;' . $clientData['CliNombre'] . ' ' . $clientData['CliApellido'] . '</span>
-                                </p>';
-                            else :
-                                echo '<p class="my-2">
-                                    <strong class="text-base font-bold">Cliente:</strong>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['idMotocicleta']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Marca de la motocicleta:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;Cliente no encontrado.</span>
-                                </p>';
-                            endif;
-                            ?>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtMarca']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Color:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtColor']; ?></span>
+                                </p>
+                            </div>
+                            <div class="col-span-1">
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Placa:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtPlaca']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Modelo:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtModelo']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Cilindraje:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtCilindraje']; ?></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full max-w-6xl dark:bg-gray-700 mx-auto my-3 bg-white rounded-lg shadow-lg p-5">
+                        <h2 class="text-center text-xl font-bold">RInformación del Cliente</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="col-span-1">
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Nombre completo:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliNombre'] . ' ' . $client['CliApellido']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">telefono principal:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliTelefono']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Dirección:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliDireccion']; ?></span>
+                                </p>
+                            </div>
+
+                            <div class="col-span-1">
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Documento:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliDocumento']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Telefono Secundario:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliTelefonoSecundario']; ?></span>
+                                </p>
+                                <p class="my-2">
+                                    <strong class="text-base font-bold">Correo:</strong>
+                                    <br>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliCorreo']; ?></span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <br>
             </div>
-
     <?php
         } else {
             echo "Motocicleta no encontrada";
@@ -89,8 +126,13 @@
         echo "ID de motocicleta no válido";
     }
     ?>
-    <?php include '../shared/footer.php'; ?>
+    <div class="flex p-1 justify-center space-x-3">
+        <a href="index.php" class="bg-cyan-700 hover:bg-cyan-800 text-white font-semibold py-2 px-4 my-3 rounded">
+            <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i> Volver a la pagina de Motocicletas
+        </a>
+    </div>
 
+    <?php include '../shared/footer.php'; ?>
 </body>
 
 </html>

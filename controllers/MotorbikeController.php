@@ -16,42 +16,6 @@ class MotorbikeController
 
         $this->clientController = new ClientController();
     }
-    public function getAllMotorbikes()
-    {
-        try {
-            $motorbikes = $this->motorbikeModel->getAll();
-            return $motorbikes;
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
-
-    public function getMotorbikeById($idMotocicleta)
-    {
-        try {
-            return $this->motorbikeModel->find($idMotocicleta);
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            return null;
-        }
-    }
-
-    public function createMotorbike($data)
-    {
-        try {
-            $this->motorbikeModel->MtPlaca = $data['MtPlaca'];
-            $this->motorbikeModel->MtMarca = $data['MtMarca'];
-            $this->motorbikeModel->MtModelo = $data['MtModelo'];
-            $this->motorbikeModel->MtCilindraje = $data['MtCilindraje'];
-            $this->motorbikeModel->MtColor = $data['MtColor'];
-            $this->motorbikeModel->MtCliente = $data['MtCliente'];
-            return $this->motorbikeModel->save();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
 
     public function create()
     {
@@ -74,6 +38,42 @@ class MotorbikeController
         }
     }
 
+    public function createMotorbike($data)
+    {
+        try {
+            $this->motorbikeModel->MtPlaca = $data['MtPlaca'];
+            $this->motorbikeModel->MtMarca = $data['MtMarca'];
+            $this->motorbikeModel->MtModelo = $data['MtModelo'];
+            $this->motorbikeModel->MtCilindraje = $data['MtCilindraje'];
+            $this->motorbikeModel->MtColor = $data['MtColor'];
+            $this->motorbikeModel->MtCliente = $data['MtCliente'];
+            return $this->motorbikeModel->save();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getMotorbikeById($idMotocicleta)
+    {
+        try {
+            return $this->motorbikeModel->find($idMotocicleta);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+
+    public function getAllMotorbikes()
+    {
+        try {
+            $motorbikes = $this->motorbikeModel->getAll();
+            return $motorbikes;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
 
     public function edit($idMotocicleta)
     {
@@ -105,6 +105,7 @@ class MotorbikeController
             }
         }
     }
+
     public function updateMotorbike($data)
     {
         try {
@@ -121,16 +122,7 @@ class MotorbikeController
             return 0;
         }
     }
-    public function deleteMotorbike($idMotocicleta)
-    {
-        try {
-            $this->motorbikeModel->idMotocicleta = $idMotocicleta;
-            return $this->motorbikeModel->delete();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return false;
-        }
-    }
+
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -146,6 +138,18 @@ class MotorbikeController
             }
         }
     }
+
+    public function deleteMotorbike($idMotocicleta)
+    {
+        try {
+            $this->motorbikeModel->idMotocicleta = $idMotocicleta;
+            return $this->motorbikeModel->delete();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
     public function showClientByMotorbike($idMotocicleta)
     {
         try {
@@ -158,8 +162,13 @@ class MotorbikeController
             $client = $this->getClientByMotorbike($motorbike);
 
             return $client !== null ? [
+                'CliDocumento' => $client['CliDocumento'],
                 'CliNombre' => $client['CliNombre'],
                 'CliApellido' => $client['CliApellido'],
+                'CliTelefono' => $client['CliTelefono'],
+                'CliTelefonoSecundario' => $client['CliTelefonoSecundario'],
+                'CliCorreo' => $client['CliCorreo'],
+                'CliDireccion' => $client['CliDireccion']
             ] : null;
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -172,7 +181,7 @@ class MotorbikeController
         $clientId = intval($motorbike['MtCliente']);
         return $this->clientController->getClientById($clientId);
     }
-    
+
     public function getAllClients()
     {
         try {

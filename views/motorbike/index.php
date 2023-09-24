@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motocicletas</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a09d03aeb8.js" crossorigin="anonymous"></script>
+    <title>Motocicletas</title>
 </head>
 
-<body>
+<body class="dark:text-white dark:bg-gray-800">
     <?php
     include '../shared/header.php';
     include '../../controllers/MotorbikeController.php';
@@ -22,54 +23,62 @@
 
     <div class="container mx-auto p-6">
         <h1 class="text-3xl font-semibold mb-6">Lista de Motocicletas</h1>
-        <a href="create.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block mb-4">Añadir Motocicleta</a>
+        <a href="create.php" class="bg-indigo-800 hover:bg-indigo-900 text-white font-bold py-2 px-4 rounded inline-block mb-4"><i class="fa-solid fa-plus" style="color: #ffffff;"></i> Añadir Motocicleta</a>
+        <a href="../index.php" class="bg-cyan-700 hover:bg-cyan-800 text-white font-semibold  py-2 px-4 my-3 rounded">
+            <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i> Volver al inicio
+        </a>
         <?php if (!empty($motorbikes) && is_array($motorbikes)) : ?>
-            <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-lg">
-                <thead class="bg-gray-800 text-white">
-                    <tr>
-                        <th class="w-1/6 text-left py-2 px-4">Placa</th>
-                        <th class="w-1/6 text-left py-2 px-4">Marca</th>
-                        <th class="w-1/6 text-left py-2 px-4">Modelo</th>
-                        <th class="w-1/6 text-left py-2 px-4">Cilindraje</th>
-                        <th class="w-1/6 text-left py-2 px-4">Color</th>
-                        <th class="w-1/6 text-left py-2 px-4">Cliente</th>
-                        <th class="w-1/6 text-left py-2 px-4">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($motorbikes as $motorbike) : ?>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg table-auto">
+                    <thead class="bg-gray-800 text-white dark:bg-gray-700">
                         <tr>
-                            <td class="text-left py-2 px-4"><?php echo $motorbike['MtPlaca']; ?></td>
-                            <td class="text-left py-2 px-4"><?php echo $motorbike['MtMarca']; ?></td>
-                            <td class="text-left py-2 px-4"><?php echo $motorbike['MtModelo']; ?></td>
-                            <td class="text-left py-2 px-4"><?php echo $motorbike['MtCilindraje']; ?></td>
-                            <td class="text-left py-2 px-4"><?php echo $motorbike['MtColor']; ?></td>
-
-                            <?php
-                            $clientData = $motorbikeController->showClientByMotorbike($motorbike['idMotocicleta']);
-
-                            if ($clientData !== null) :
-                                echo '<td class="text-left py-2 px-4">' . $clientData['CliNombre'] . ' ' . $clientData['CliApellido'] . '</td>';
-                            else :
-                                echo '<td class="text-left py-2 px-4">Cliente no encontrado.</td>';
-                            endif;
-                            ?>
-
-                            <td class="text-left py-2 px-4">
-                                <a href="edit.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="text-blue-500 hover:underline">Editar</a>
-                                <a href="delete.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="text-red-500 hover:underline ml-4">Eliminar</a>
-                                <a href="view.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="text-green-500 hover:underline ml-4">Detalles</a>
-                            </td>
+                            <th class="w-1/6 text-left py-2 px-4">Placa</th>
+                            <th class="w-1/6 text-left py-2 px-4">Marca</th>
+                            <th class="w-1/6 text-left py-2 px-4 hidden md:table-cell">Modelo</th>
+                            <th class="w-1/6 text-left py-2 px-4 hidden md:table-cell">Cilindraje</th>
+                            <th class="w-1/6 text-left py-2 px-4 hidden md:table-cell">Color</th>
+                            <th class="w-1/6 text-left py-2 px-4 hidden md:table-cell">Cliente</th>
+                            <th class="w-1/6 text-left py-2 px-4">Acciones</th>
                         </tr>
-                    <?php endforeach; ?>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($motorbikes as $motorbike) : ?>
+                            <tr>
+                                <td class="text-left py-2 px-4"><?php echo $motorbike['MtPlaca']; ?></td>
+                                <td class="text-left py-2 px-4"><?php echo $motorbike['MtMarca']; ?></td>
+                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo $motorbike['MtModelo']; ?></td>
+                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo $motorbike['MtCilindraje']; ?></td>
+                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo $motorbike['MtColor']; ?></td>
 
-                </tbody>
-            </table>
-        <?php else : ?>
-            <p class="text-gray-700 text-lg">No se encontraron motocicletas.</p>
-        <?php endif; ?>
+                                <?php
+                                $clientData = $motorbikeController->showClientByMotorbike($motorbike['idMotocicleta']);
+
+                                if ($clientData !== null) :
+                                    echo '<td class="text-left py-2 px-4 hidden md:table-cell">' . $clientData['CliNombre'] . ' ' . $clientData['CliApellido'] . '</td>';
+                                else :
+                                    echo '<td class="text-left py-2 px-4 hidden md:table-cell">Cliente no encontrado.</td>';
+                                endif;
+                                ?>
+
+                                <td class="text-left py-2 px-4">
+                                    <a href="view.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
+                                    <a href="edit.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
+                                    <a href="delete.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else : ?>
+                <p class="text-gray-700 text-lg">No se encontraron motocicletas.</p>
+            <?php endif; ?>
+            </div>
+            <div class="flex p-1 justify-center">
+                <a href="../index.php" class="bg-cyan-700 hover:bg-cyan-800 text-white font-semibold  py-2 px-4 my-3 rounded">
+                    <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i> Volver al inicio
+                </a>
+            </div>
     </div>
-
     <?php include '../shared/footer.php'; ?>
 </body>
 

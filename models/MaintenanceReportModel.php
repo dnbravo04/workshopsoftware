@@ -19,10 +19,13 @@ class MaintenanceReportModel
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function getAll(){
-        $query = $this->db->prepare("SELECT * FROM reporte_mantenimiento");
-        $query->execute();
-        return $query->fetchAll();
+    public function save()
+    {
+        $sql = "INSERT INTO reporte_mantenimiento (RepFecha, RepInformeDiagnostico, RepMantenimientoRealizado, RepTiempoReparacion, RepMotocicleta, RepMecanicoEncargado, RepRepuestosUtilizados) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$this->RepFecha, $this->RepInformeDiagnostico, $this->RepMantenimientoRealizado, $this->RepTiempoReparacion, $this->RepMotocicleta, $this->RepMecanicoEncargado, $this->RepRepuestosUtilizados]);
+
+        return $stmt->rowCount();
     }
 
     public function find($idReporte)
@@ -34,13 +37,11 @@ class MaintenanceReportModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function save()
+    public function getAll()
     {
-        $sql = "INSERT INTO reporte_mantenimiento (RepFecha, RepInformeDiagnostico, RepMantenimientoRealizado, RepTiempoReparacion, RepMotocicleta, RepMecanicoEncargado, RepRepuestosUtilizados) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$this->RepFecha, $this->RepInformeDiagnostico, $this->RepMantenimientoRealizado, $this->RepTiempoReparacion, $this->RepMotocicleta, $this->RepMecanicoEncargado, $this->RepRepuestosUtilizados]);
-
-        return $stmt->rowCount();
+        $query = $this->db->prepare("SELECT * FROM reporte_mantenimiento");
+        $query->execute();
+        return $query->fetchAll();
     }
 
     public function update()

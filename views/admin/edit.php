@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Mecánico</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a09d03aeb8.js" crossorigin="anonymous"></script>
+    <title>Editar Administrador</title>
 </head>
 
-<body>
+<body class="dark:text-white dark:bg-gray-800">
     <?php
     include '../shared/header.php';
     include '../../controllers/AdminController.php';
@@ -28,43 +29,48 @@
 
         if ($admin != null) {
     ?>
-            <div class="container mx-auto mt-10">
+            <div class="container mx-auto px-4 mt-10">
                 <h2 class="text-2xl font-semibold mb-4">Editar Administrador</h2>
                 <form action="" method="POST">
 
                     <input type="hidden" name="idAdministrador" value="<?php echo $admin['idAdministrador']; ?>">
                     <div class="mb-4">
-                        <label for="AdmDocumento" class="block text-gray-700">Documento:</label>
-                        <input type="text" id="AdmDocumento" name="AdmDocumento" class="w-full border border-gray-300 rounded p-2" value="<?php echo $admin['AdmDocumento']; ?>" required>
+                        <label for="AdmDocumento" class="block text-gray-700 dark:text-white">Documento:</label>
+                        <input type="text" id="AdmDocumento" name="AdmDocumento" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $admin['AdmDocumento']; ?>" required>
                     </div>
                     <div class="mb-4">
-                        <label for="AdmNombre" class="block text-gray-700">Nombre:</label>
-                        <input type="text" id="AdmNombre" name="AdmNombre" class="w-full border border-gray-300 rounded p-2" value="<?php echo $admin['AdmNombre']; ?>" required>
+                        <label for="AdmNombre" class="block text-gray-700 dark:text-white">Nombre:</label>
+                        <input type="text" id="AdmNombre" name="AdmNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $admin['AdmNombre']; ?>" required>
                     </div>
                     <div class="mb-4">
-                        <label for="AdmApellido" class="block text-gray-700">Apellido:</label>
-                        <input type="text" id="AdmApellido" name="AdmApellido" class="w-full border border-gray-300 rounded p-2" value="<?php echo $admin['AdmApellido']; ?>" required>
+                        <label for="AdmApellido" class="block text-gray-700 dark:text-white">Apellido:</label>
+                        <input type="text" id="AdmApellido" name="AdmApellido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $admin['AdmApellido']; ?>" required>
                     </div>
                     <div class="mb-4">
-                        <label for="AdmTelefono" class="block text-gray-700">Teléfono:</label>
-                        <input type="text" id="AdmTelefono" name="AdmTelefono" class="w-full border border-gray-300 rounded p-2" value="<?php echo $admin['AdmTelefono']; ?>" required>
+                        <label for="AdmTelefono" class="block text-gray-700 dark:text-white">Teléfono:</label>
+                        <input type="text" id="AdmTelefono" name="AdmTelefono" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $admin['AdmTelefono']; ?>" required>
                     </div>
                     <div class="mb-4">
-                        <label for="AdmCorreo" class="block text-gray-700">Correo:</label>
-                        <input type="email" id="AdmCorreo" name="AdmCorreo" class="w-full border border-gray-300 rounded p-2" value="<?php echo $admin['AdmCorreo']; ?>" required>
+                        <label for="AdmCorreo" class="block text-gray-700 dark:text-white">Correo:</label>
+                        <input type="email" id="AdmCorreo" name="AdmCorreo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $admin['AdmCorreo']; ?>" required>
                     </div>
                     <div class="mb-4">
-                        <label for="AdmUsuario" class="block text-gray-700">Nombre de Usuario:</label>
-                        <input type="text" id="AdmUsuario" name="AdmUsuario" class="w-full border border-gray-300 rounded p-2" value="<?php echo $admin['AdmUsuario']; ?>" required>
+                        <label for="AdmUsuario" class="block text-gray-700 dark:text-white">Nombre de Usuario:</label>
+                        <input type="text" id="AdmUsuario" name="AdmUsuario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $admin['AdmUsuario']; ?>" required>
                     </div>
                     <div class="mb-4">
-                        <label for="AdmContraseña" class="block text-gray-700">Nueva Contraseña:</label>
-                        <input type="password" id="AdmContraseña" name="AdmContraseña" class="w-full border border-gray-300 rounded p-2" placeholder="Ingrese nueva contraseña si desea cambiarla">
+                        <label for="AdmContraseña" class="block text-gray-700 dark:text-white">Nueva Contraseña:</label>
+                        <input type="password" id="AdmContraseña" name="AdmContraseña" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese nueva contraseña si desea cambiarla">
                     </div>
-                    <div class="mt-4">
+                    <div class="flex p-1 justify-center space-x-3 mb-4">
+
                         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-                            Guardar Cambios
+                            <i class="fa-regular fa-floppy-disk" style="color: #ffffff;"></i> Guardar Cambios
                         </button>
+
+                        <a href="index.php" class="bg-cyan-700 hover:bg-cyan-800 text-white font-semibold py-2 px-4 rounded">
+                            <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i> Volver a la pagina de administradores
+                        </a>
                     </div>
                 </form>
             </div>

@@ -17,12 +17,16 @@ class SparePartsModel
         $this->db = new PDO("mysql:host=localhost;dbname=workshopsoftware_db", "root", "");
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-    public function getAll()
+
+    public function save()
     {
-        $query = $this->db->prepare("SELECT * FROM repuestos_motocicleta");
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "INSERT INTO repuestos_motocicleta (RepuCodigo, RepuNombre, RepuDescripcion, RepuTipo, RepuMarca, RepuModelo) VALUES (?, ?, ?, ?,?,?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$this->RepuCodigo, $this->RepuNombre, $this->RepuDescripcion, $this->RepuTipo, $this->RepuMarca, $this->RepuModelo]);
+
+        return $stmt->rowCount();
     }
+
     public function find($idRepuesto)
     {
         $sql = "SELECT * FROM repuestos_motocicleta WHERE idRepuesto = ?";
@@ -32,13 +36,11 @@ class SparePartsModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function save()
+    public function getAll()
     {
-        $sql = "INSERT INTO repuestos_motocicleta (RepuCodigo, RepuNombre, RepuDescripcion, RepuTipo, RepuMarca, RepuModelo) VALUES (?, ?, ?, ?,?,?)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$this->RepuCodigo, $this->RepuNombre, $this->RepuDescripcion, $this->RepuTipo, $this->RepuMarca, $this->RepuModelo]);
-
-        return $stmt->rowCount();
+        $query = $this->db->prepare("SELECT * FROM repuestos_motocicleta");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function update()

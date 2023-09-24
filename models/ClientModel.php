@@ -18,15 +18,13 @@ class ClientModel
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function getAll()
+    public function save()
     {
-        $sql = "SELECT * FROM cliente";
-        $stmt = $this->db->query($sql);
+        $sql = "INSERT INTO cliente (CliDocumento, CliNombre, CliApellido, CliTelefono, CliTelefonoSecundario, CliCorreo, CliDireccion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$this->CliDocumento, $this->CliNombre, $this->CliApellido, $this->CliTelefono, $this->CliTelefonoSecundario, $this->CliCorreo, $this->CliDireccion]);
 
-        if ($stmt->errorInfo()[0] !== '00000') {
-            throw new Exception('Error al obtener los clientes');
-        }
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->rowCount();
     }
 
     public function find(int $idCliente)
@@ -41,18 +39,16 @@ class ClientModel
         return $clientData ?: [];
     }
 
-
-
-    public function save()
+    public function getAll()
     {
-        $sql = "INSERT INTO cliente (CliDocumento, CliNombre, CliApellido, CliTelefono, CliTelefonoSecundario, CliCorreo, CliDireccion) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$this->CliDocumento, $this->CliNombre, $this->CliApellido, $this->CliTelefono, $this->CliTelefonoSecundario, $this->CliCorreo, $this->CliDireccion]);
+        $sql = "SELECT * FROM cliente";
+        $stmt = $this->db->query($sql);
 
-        return $stmt->rowCount();
+        if ($stmt->errorInfo()[0] !== '00000') {
+            throw new Exception('Error al obtener los clientes');
+        }
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-
 
     public function update()
     {

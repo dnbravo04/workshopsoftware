@@ -10,43 +10,6 @@ class SparePartsController
     {
         $this->sparePartsModel = new SparePartsModel();
     }
-    public function getAllSpareParts()
-    {
-
-        try {
-            $spareParts = $this->sparePartsModel->getAll();
-            return $spareParts;
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
-    public function getSparePartsById($idRepuesto)
-    {
-        try {
-            $spareParts = $this->sparePartsModel->find($idRepuesto);
-            return $spareParts;
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
-    public function createSpareParts($data)
-    {
-        try {
-            $this->sparePartsModel->RepuCodigo = $data['RepuCodigo'];
-            $this->sparePartsModel->RepuNombre = $data['RepuNombre'];
-            $this->sparePartsModel->RepuDescripcion = $data['RepuDescripcion'];
-            $this->sparePartsModel->RepuTipo = $data['RepuTipo'];
-            $this->sparePartsModel->RepuMarca = $data['RepuMarca'];
-            $this->sparePartsModel->RepuModelo = $data['RepuModelo'];
-
-            return $this->sparePartsModel->save();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
 
     public function create()
     {
@@ -68,6 +31,47 @@ class SparePartsController
             }
         }
     }
+
+    public function createSpareParts($data)
+    {
+        try {
+            $this->sparePartsModel->RepuCodigo = $data['RepuCodigo'];
+            $this->sparePartsModel->RepuNombre = $data['RepuNombre'];
+            $this->sparePartsModel->RepuDescripcion = $data['RepuDescripcion'];
+            $this->sparePartsModel->RepuTipo = $data['RepuTipo'];
+            $this->sparePartsModel->RepuMarca = $data['RepuMarca'];
+            $this->sparePartsModel->RepuModelo = $data['RepuModelo'];
+
+            return $this->sparePartsModel->save();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getSparePartsById($idRepuesto)
+    {
+        try {
+            $spareParts = $this->sparePartsModel->find($idRepuesto);
+            return $spareParts;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getAllSpareParts()
+    {
+
+        try {
+            $spareParts = $this->sparePartsModel->getAll();
+            return $spareParts;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
     public function edit($idRepuesto)
     {
         if (empty($idRepuesto) || !is_numeric($idRepuesto)) {
@@ -99,6 +103,7 @@ class SparePartsController
             }
         }
     }
+
     public function updateSpareParts($data)
     {
         try {
@@ -115,16 +120,7 @@ class SparePartsController
             return 0;
         }
     }
-    public function deleteSpareParts($idRepuesto)
-    {
-        try {
-            $this->sparePartsModel->idRepuesto = $idRepuesto;
-            return $this->sparePartsModel->delete($idRepuesto);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return false;
-        }
-    }
+
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -137,6 +133,17 @@ class SparePartsController
             } else {
                 echo "Error al eliminar el repuesto";
             }
+        }
+    }
+
+    public function deleteSpareParts($idRepuesto)
+    {
+        try {
+            $this->sparePartsModel->idRepuesto = $idRepuesto;
+            return $this->sparePartsModel->delete($idRepuesto);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return false;
         }
     }
 }

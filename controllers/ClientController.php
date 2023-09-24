@@ -11,24 +11,29 @@ class ClientController
         $this->clientModel = new ClientModel();
     }
 
-    public function getAllClients()
+    public function create()
     {
-        try {
-            $clients = $this->clientModel->getAll();
-            return $clients;
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    public function getClientById($idCliente)
-    {
-        try {
-            return $this->clientModel->find($idCliente);
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            return null;
+            $data = [
+                'CliDocumento' => $_POST['CliDocumento'],
+                'CliNombre' => $_POST['CliNombre'],
+                'CliApellido' => $_POST['CliApellido'],
+                'CliTelefono' => $_POST['CliTelefono'],
+                'CliTelefonoSecundario' => $_POST['CliTelefonoSecundario'],
+                'CliCorreo' => $_POST['CliCorreo'],
+                'CliDireccion' => $_POST['CliDireccion']
+            ];
+
+
+            $result = $this->createClient($data);
+
+            if ($result !== null) {
+                header('Location: index.php');
+                exit();
+            } else {
+                echo "Error al crear el cliente";
+            }
         }
     }
 
@@ -50,29 +55,24 @@ class ClientController
         }
     }
 
-    public function create()
+    public function getClientById($idCliente)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
+            return $this->clientModel->find($idCliente);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
 
-            $data = [
-                'CliDocumento' => $_POST['CliDocumento'],
-                'CliNombre' => $_POST['CliNombre'],
-                'CliApellido' => $_POST['CliApellido'],
-                'CliTelefono' => $_POST['CliTelefono'],
-                'CliTelefonoSecundario' => $_POST['CliTelefonoSecundario'],
-                'CliCorreo' => $_POST['CliCorreo'],
-                'CliDireccion' => $_POST['CliDireccion'],
-            ];
-
-
-            $result = $this->createClient($data);
-
-            if ($result !== null) {
-                header('Location: index.php');
-                exit();
-            } else {
-                echo "Error al crear el cliente";
-            }
+    public function getAllClients()
+    {
+        try {
+            $clients = $this->clientModel->getAll();
+            return $clients;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
         }
     }
 
@@ -106,8 +106,8 @@ class ClientController
 
 
         $result = $this->updateClient($data);
-        
-        if ($result!== null) {
+
+        if ($result !== null) {
             header('Location: index.php');
             exit();
         } else {
@@ -134,17 +134,6 @@ class ClientController
         }
     }
 
-    public function deleteClient($idCliente)
-    {
-        try {
-            $this->clientModel->idCliente = $idCliente;
-            return $this->clientModel->delete();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return false;
-        }
-    }
-
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -158,6 +147,17 @@ class ClientController
             } else {
                 echo "Error al eliminar el cliente";
             }
+        }
+    }
+
+    public function deleteClient($idCliente)
+    {
+        try {
+            $this->clientModel->idCliente = $idCliente;
+            return $this->clientModel->delete();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return false;
         }
     }
 }

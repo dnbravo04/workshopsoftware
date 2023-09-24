@@ -17,11 +17,13 @@ class MechanicModel
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function getAll()
+    public function save()
     {
-        $query = $this->db->prepare("SELECT * FROM mecanico");
-        $query->execute();
-        return $query->fetchAll();
+        $sql = "INSERT INTO mecanico (MecDocumento, MecNombre, MecApellido, MecTelefono, MecCorreo, MecEspecializacion) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$this->MecDocumento, $this->MecNombre, $this->MecApellido, $this->MecTelefono, $this->MecCorreo, $this->MecEspecializacion]);
+
+        return $stmt->rowCount();
     }
 
     public function find($idMecanico)
@@ -33,13 +35,11 @@ class MechanicModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function save()
+    public function getAll()
     {
-        $sql = "INSERT INTO mecanico (MecDocumento, MecNombre, MecApellido, MecTelefono, MecCorreo, MecEspecializacion) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$this->MecDocumento, $this->MecNombre, $this->MecApellido, $this->MecTelefono, $this->MecCorreo, $this->MecEspecializacion]);
-
-        return $stmt->rowCount();
+        $query = $this->db->prepare("SELECT * FROM mecanico");
+        $query->execute();
+        return $query->fetchAll();
     }
 
     public function update()

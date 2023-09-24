@@ -1,4 +1,4 @@
-<nav class="bg-gray-800 p-6">
+<nav class="dark:bg-gray-700 bg-gray-800 p-6">
     <div class="container mx-auto flex items-center justify-between">
         <div class="flex items-center flex-shrink-0 text-white">
             <a href="/workshopsoftware/views/index.php">

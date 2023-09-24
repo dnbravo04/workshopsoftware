@@ -9,43 +9,7 @@ class MechanicController
     {
         $this->mechanicModel = new MechanicModel();
     }
-
-    public function getAllMechanics()
-    {
-        try {
-            $mechanics = $this->mechanicModel->getAll();
-            return $mechanics;
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
-
-    public function getMechanicById($idMecanico)
-    {
-        try {
-            return $this->mechanicModel->find($idMecanico);
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            return null;
-        }
-    }
-    public function createMechanic($data)
-    {
-        try {
-            $this->mechanicModel->MecDocumento = $data['MecDocumento'];
-            $this->mechanicModel->MecNombre = $data['MecNombre'];
-            $this->mechanicModel->MecApellido = $data['MecApellido'];
-            $this->mechanicModel->MecTelefono = $data['MecTelefono'];
-            $this->mechanicModel->MecCorreo = $data['MecCorreo'];
-            $this->mechanicModel->MecEspecializacion = $data['MecEspecializacion'];
-            return $this->mechanicModel->save();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
-
+    
     public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -64,6 +28,43 @@ class MechanicController
             } else {
                 echo "Error al crear el mecánico";
             }
+        }
+    }
+
+    public function createMechanic($data)
+    {
+        try {
+            $this->mechanicModel->MecDocumento = $data['MecDocumento'];
+            $this->mechanicModel->MecNombre = $data['MecNombre'];
+            $this->mechanicModel->MecApellido = $data['MecApellido'];
+            $this->mechanicModel->MecTelefono = $data['MecTelefono'];
+            $this->mechanicModel->MecCorreo = $data['MecCorreo'];
+            $this->mechanicModel->MecEspecializacion = $data['MecEspecializacion'];
+            return $this->mechanicModel->save();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getMechanicById($idMecanico)
+    {
+        try {
+            return $this->mechanicModel->find($idMecanico);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+
+    public function getAllMechanics()
+    {
+        try {
+            $mechanics = $this->mechanicModel->getAll();
+            return $mechanics;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
         }
     }
 
@@ -100,7 +101,6 @@ class MechanicController
         }
     }
 
-
     public function updateMechanic($data)
     {
         try {
@@ -118,17 +118,6 @@ class MechanicController
         }
     }
 
-    public function deleteMechanic($idMecanico)
-    {
-        try {
-            $this->mechanicModel->idMecanico = $idMecanico;
-            return $this->mechanicModel->delete();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
-
     public function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -140,6 +129,17 @@ class MechanicController
             } else {
                 echo "Error al eliminar el mecánico";
             }
+        }
+    }
+
+    public function deleteMechanic($idMecanico)
+    {
+        try {
+            $this->mechanicModel->idMecanico = $idMecanico;
+            return $this->mechanicModel->delete();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
         }
     }
 }
