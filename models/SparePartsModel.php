@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Database.php';
 class SparePartsModel
 {
     private $db;
@@ -14,8 +14,8 @@ class SparePartsModel
 
     public function __construct()
     {
-        $this->db = new PDO("mysql:host=localhost;dbname=workshopsoftware_db", "root", "");
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $database = new Database();
+        $this->db = $database->connect();
     }
 
     public function save()

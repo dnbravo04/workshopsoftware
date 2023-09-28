@@ -1,11 +1,13 @@
 <?php
+require_once 'Database.php';
 class LoginModel
 {
     private $db;
 
     public function __construct()
     {
-        $this->db = new PDO("mysql:host=localhost;dbname=workshopsoftware_db", "root", "");
+        $database = new Database();
+        $this->db = $database->connect();
     }
 
     public function autenticarUsuario($username, $password)
