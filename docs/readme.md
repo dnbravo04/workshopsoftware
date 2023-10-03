@@ -8,8 +8,8 @@ El software es una aplicación web que funciona en navegadores de internet de es
 
 ## Como funciona?
 
-• El sistema gestionará el historial de mantenimiento de las motocicletas por usuario, es decir, datos básicos del usuario y las veces que lleva a revisión el automotor.
-• El sistema llevará un inventario de los repuestos y partes que hay en el taller mecánico, además de asignarlos a las motos en reparación, de ser necesario.
+-  El sistema gestionará el historial de mantenimiento de las motocicletas por usuario, es decir, datos básicos del usuario y las veces que lleva a revisión el automotor.
+-  El sistema llevará un inventario de los repuestos y partes que hay en el taller mecánico, además de asignarlos a las motos en reparación, de ser necesario.
 
 ## Que tecnologias utiliza?
 
