@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,26 +38,26 @@
             <div class="container mx-auto px-4 mt-10">
                 <h2 class="text-2xl font-semibold mb-4">Editar Asistente logistigo</h2>
                 <form action="" method="POST">
-                    <input type="hidden" name="idAsistenteLogistico" value="<?php echo $Asistentelogistico['idAsistLogistico']; ?>">
+                    <input type="hidden" name="idAsistenteLogistico" value="<?php echo htmlspecialchars($Asistentelogistico['idAsistLogistico'], ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="mb-4">
                         <label for="ALDocumento" class="block text-gray-700 dark:text-white">Documento:</label>
-                        <input type="text" id="ALDocumento" name="ALDocumento" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $Asistentelogistico['ALDocumento']; ?>" required>
+                        <input type="text" id="ALDocumento" name="ALDocumento" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($Asistentelogistico['ALDocumento'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="ALNombre" class="block text-gray-700 dark:text-white">Nombre:</label>
-                        <input type="text" id="ALNombre" name="ALNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $Asistentelogistico['ALNombre']; ?>" required>
+                        <input type="text" id="ALNombre" name="ALNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($Asistentelogistico['ALNombre'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="ALApellido" class="block text-gray-700 dark:text-white">Apellido:</label>
-                        <input type="text" id="ALApellido" name="ALApellido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $Asistentelogistico['ALApellido']; ?>" required>
+                        <input type="text" id="ALApellido" name="ALApellido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($Asistentelogistico['ALApellido'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="ALTelefono" class="block text-gray-700 dark:text-white">Teléfono:</label>
-                        <input type="text" id="ALTelefono" name="ALTelefono" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $Asistentelogistico['ALTelefono']; ?>" required>
+                        <input type="text" id="ALTelefono" name="ALTelefono" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($Asistentelogistico['ALTelefono'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="ALCorreo" class="block text-gray-700 dark:text-white">Correo:</label>
-                        <input type="email" id="ALCorreo" name="ALCorreo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $Asistentelogistico['ALCorreo']; ?>" required>
+                        <input type="email" id="ALCorreo" name="ALCorreo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($Asistentelogistico['ALCorreo'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
 
                     <div class="flex p-1 justify-center space-x-3 mb-4">

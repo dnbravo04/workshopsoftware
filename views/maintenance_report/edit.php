@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es-CO">
 
@@ -35,16 +42,16 @@
             <div class="container mx-auto mt-10">
                 <h2 class="text-2xl font-semibold mb-4">Editar reporte de mantenimiento</h2>
                 <form action="" method="POST" class="max-w-screen-md mx-auto p-6">
-                    <input type="hidden" name="idReporte" value="<?php echo $maintenanceReport['idReporte']; ?>">
+                    <input type="hidden" name="idReporte" value="<?php echo htmlspecialchars($maintenanceReport['idReporte'], ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="lg:grid lg:grid-cols-2 gap-4 md:grid md:grid-cols-1">
                         <div class="col-span-1 md:block">
                             <div class="mb-4">
                                 <label for="RepFecha" class="block text-gray-700 dark:text-white">Fecha:</label>
-                                <input type="date" id="RepFecha" name="RepFecha" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $maintenanceReport['RepFecha'] ?>" required>
+                                <input type="date" id="RepFecha" name="RepFecha" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($maintenanceReport['RepFecha'], ENT_QUOTES, 'UTF-8') ?>" required>
                             </div>
                             <div class="mb-4">
                                 <label for="RepInformeDiagnostico" class="block text-gray-700 dark:text-white">Informe diagnostico preliminar</label>
-                                <textarea id="RepInformeDiagnostico" name="RepInformeDiagnostico" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo $maintenanceReport['RepInformeDiagnostico'] ?></textarea>
+                                <textarea id="RepInformeDiagnostico" name="RepInformeDiagnostico" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo htmlspecialchars($maintenanceReport['RepInformeDiagnostico'], ENT_QUOTES, 'UTF-8') ?></textarea>
                             </div>
                             <div class="mb-4">
                                 <label for="RepMecanicoEncargado" class="block text-gray-700 dark:text-white">Mecanico Encargado</label>
@@ -62,7 +69,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="RepTiempoReparacion" class="block text-gray-700 dark:text-white"> Tiempo de reparación</label>
-                                <input type="text" id="RepTiempoReparacion" name="RepTiempoReparacion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $maintenanceReport['RepTiempoReparacion'] ?>">
+                                <input type="text" id="RepTiempoReparacion" name="RepTiempoReparacion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($maintenanceReport['RepTiempoReparacion'], ENT_QUOTES, 'UTF-8') ?>">
                             </div>
                         </div>
                         <div class="col-span-1 md:block">
@@ -81,7 +88,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="RepMantenimientoRealizado" class="block text-gray-700 dark:text-white">Informe mantenimiento realizado</label>
-                                <textarea id="RepMantenimientoRealizado" name="RepMantenimientoRealizado" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo $maintenanceReport['RepMantenimientoRealizado'] ?></textarea>
+                                <textarea id="RepMantenimientoRealizado" name="RepMantenimientoRealizado" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo htmlspecialchars($maintenanceReport['RepMantenimientoRealizado'], ENT_QUOTES, 'UTF-8') ?></textarea>
                             </div>
                             <div class="mb-4">
                                 <label for="RepRepuestosUtilizados" class="block text-gray-700 dark:text-white">Repuestos Utilizados</label>

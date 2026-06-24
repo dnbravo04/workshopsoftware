@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es-CO">
 
@@ -44,11 +51,11 @@
                     <tbody>
                         <?php foreach ($motorbikes as $motorbike) : ?>
                             <tr>
-                                <td class="text-left py-2 px-4"><?php echo $motorbike['MtPlaca']; ?></td>
-                                <td class="text-left py-2 px-4"><?php echo $motorbike['MtMarca']; ?></td>
-                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo $motorbike['MtModelo']; ?></td>
-                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo $motorbike['MtCilindraje']; ?></td>
-                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo $motorbike['MtColor']; ?></td>
+                                <td class="text-left py-2 px-4"><?php echo htmlspecialchars($motorbike['MtPlaca'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td class="text-left py-2 px-4"><?php echo htmlspecialchars($motorbike['MtMarca'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($motorbike['MtModelo'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($motorbike['MtCilindraje'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($motorbike['MtColor'], ENT_QUOTES, 'UTF-8'); ?></td>
 
                                 <?php
                                 $clientData = $motorbikeController->showClientByMotorbike($motorbike['idMotocicleta']);
@@ -61,9 +68,9 @@
                                 ?>
 
                                 <td class="text-left py-2 px-4">
-                                    <a href="view.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
-                                    <a href="edit.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
-                                    <a href="delete.php?id=<?php echo $motorbike['idMotocicleta']; ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
+                                    <a href="view.php?id=<?php echo htmlspecialchars($motorbike['idMotocicleta'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
+                                    <a href="edit.php?id=<?php echo htmlspecialchars($motorbike['idMotocicleta'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
+                                    <a href="delete.php?id=<?php echo htmlspecialchars($motorbike['idMotocicleta'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

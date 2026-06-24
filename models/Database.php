@@ -19,7 +19,8 @@ class Database
                 );
                 self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
-                die("Failed to connect to database: " . $e->getMessage());
+                error_log("DB connection failed: " . $e->getMessage());
+                die("Error de conexión. Por favor contacte al administrador.");
             }
         }
 

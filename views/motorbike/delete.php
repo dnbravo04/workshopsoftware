@@ -1,4 +1,9 @@
-<?php
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
 include '../../controllers/MotorbikeController.php';
 if (isset($_GET['id'])) {
     $idMotocicleta = $_GET['id'];
@@ -39,7 +44,7 @@ if ($motocicleta !== null && $_SERVER['REQUEST_METHOD'] === 'POST') {
         ?>
             <p class="mb-4">Estás seguro de que deseas borrar esta motocicleta?</p>
             <form action="" method="POST">
-                <input type="hidden" name="idMotocicleta" value="<?php echo $motocicleta['idMotocicleta']; ?>">
+                <input type="hidden" name="idMotocicleta" value="<?php echo htmlspecialchars($motocicleta['idMotocicleta'], ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="flex p-1 justify-center space-x-3 mb-4">
                     <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
                         <i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Borrar Motocicleta

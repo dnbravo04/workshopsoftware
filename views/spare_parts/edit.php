@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es-CO">
 
@@ -32,30 +39,30 @@
                 <h2 class="text-2xl font-semibold mb-4">Editar Información del Repuesto</h2>
                 <form action="" method="POST">
 
-                    <input type="hidden" name="idRepuesto" value="<?php echo $repuesto['idRepuesto']; ?>">
+                    <input type="hidden" name="idRepuesto" value="<?php echo htmlspecialchars($repuesto['idRepuesto'], ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="mb-4">
                         <label for="RepuCodigo" class="block text-gray-700 dark:text-white">Codigo:</label>
-                        <input type="text" id="RepuCodigo" name="RepuCodigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $repuesto['RepuCodigo']; ?>" required>
+                        <input type="text" id="RepuCodigo" name="RepuCodigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($repuesto['RepuCodigo'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="RepuNombre" class="block text-gray-700 dark:text-white">Nombre:</label>
-                        <input type="text" id="RepuNombre" name="RepuNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $repuesto['RepuNombre']; ?>" required>
+                        <input type="text" id="RepuNombre" name="RepuNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($repuesto['RepuNombre'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="RepuDescripcion" class="block text-gray-700 dark:text-white">Descripción:</label>
-                        <input type="text" id="RepuDescripcion" name="RepuDescripcion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $repuesto['RepuDescripcion']; ?>" required>
+                        <input type="text" id="RepuDescripcion" name="RepuDescripcion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($repuesto['RepuDescripcion'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="RepuTipo" class="block text-gray-700 dark:text-white">Tipo de Repuesto:</label>
-                        <input type="text" id="RepuTipo" name="RepuTipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $repuesto['RepuTipo']; ?>" required>
+                        <input type="text" id="RepuTipo" name="RepuTipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($repuesto['RepuTipo'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="RepuMarca" class="block text-gray-700 dark:text-white">Marca:</label>
-                        <input type="text" id="RepuMarca" name="RepuMarca" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $repuesto['RepuMarca']; ?>" required>
+                        <input type="text" id="RepuMarca" name="RepuMarca" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($repuesto['RepuMarca'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="RepuModelo" class="block text-gray-700 dark:text-white">Modelo:</label>
-                        <input type="text" id="RepuModelo" name="RepuModelo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $repuesto['RepuModelo']; ?>" required>
+                        <input type="text" id="RepuModelo" name="RepuModelo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($repuesto['RepuModelo'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="flex p-1 justify-center space-x-3 mb-4">
                         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">

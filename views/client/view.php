@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -30,7 +37,7 @@
                     <div class="w-full max-w-6xl dark:bg-gray-700 mx-auto bg-white rounded-lg shadow-lg p-5">
                         <div class="flex-col">
                             <p class="my-2">
-                                <strong class="text-4xl font-bold"><?php echo $client['CliNombre'] . ' ' . $client['CliApellido'] ?></strong>
+                                <strong class="text-4xl font-bold"><?php echo htmlspecialchars($client['CliNombre'] . ' ' . $client['CliApellido'], ENT_QUOTES, 'UTF-8') ?></strong>
                                 <br>
                                 <span class="text-xl pt-2">&nbsp;&nbsp;&nbsp;&nbsp;Cliente</span>
                             </p>
@@ -42,42 +49,42 @@
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Documento:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $client['CliDocumento']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($client['CliDocumento'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">ID del Cliente:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $client['idCliente']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($client['idCliente'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Telefono:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $client['CliTelefono']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($client['CliTelefono'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Telefono secundario: </strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $client['CliTelefonoSecundario']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($client['CliTelefonoSecundario'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Correo:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $client['CliCorreo']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($client['CliCorreo'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Dirección:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $client['CliDireccion']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($client['CliDireccion'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                         </div>

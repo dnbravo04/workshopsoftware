@@ -1,6 +1,6 @@
 <?php
 
-include_once 'C:/xampp/htdocs/workshopsoftware/models/MaintenanceReportModel.php';
+include_once __DIR__ . '/../models/MaintenanceReportModel.php';
 include_once 'MechanicController.php';
 include_once 'SparePartsController.php';
 include_once 'MotorbikeController.php';
@@ -118,7 +118,6 @@ class MaintenanceReportController
 
     public function updateMaintenanceReport($data)
     {
-        echo $data;
         try {
             $this->maintenanceReportModel->idReporte = $data['idReporte'];
             $this->maintenanceReportModel->RepFecha = $data['RepFecha'];

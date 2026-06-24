@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +36,7 @@
                         <div class="w-3/5 mx-auto dark:bg-gray-700 bg-white rounded-lg shadow-lg p-5 flex">
                             <div class="flex-col">
                                 <p class="my-2">
-                                    <strong class="text-4xl font-bold"><?php echo $admin['AdmNombre'] . ' ' . $admin['AdmApellido'] ?></strong>
+                                    <strong class="text-4xl font-bold"><?php echo htmlspecialchars($admin['AdmNombre'] . ' ' . $admin['AdmApellido'], ENT_QUOTES, 'UTF-8') ?></strong>
                                     <br>
                                     <span class="text-xl pt-2">&nbsp;&nbsp;&nbsp;&nbsp;Administrador</span>
                                 </p>
@@ -40,7 +47,7 @@
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Usuario:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $admin['AdmUsuario'] ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($admin['AdmUsuario'], ENT_QUOTES, 'UTF-8') ?></span>
                                 </p>
                             </div>
                         </div>
@@ -51,28 +58,28 @@
                                 <p class="my-2">
                                     <strong class="text-base font-bold">ID del Administrador: </strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $admin['idAdministrador'] ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($admin['idAdministrador'], ENT_QUOTES, 'UTF-8') ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Documento:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $admin['AdmDocumento'] ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($admin['AdmDocumento'], ENT_QUOTES, 'UTF-8') ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Telefono:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $admin['AdmTelefono'] ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($admin['AdmTelefono'], ENT_QUOTES, 'UTF-8') ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Correo:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $admin['AdmCorreo'] ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($admin['AdmCorreo'], ENT_QUOTES, 'UTF-8') ?></span>
                                 </p>
                             </div>
                         </div>

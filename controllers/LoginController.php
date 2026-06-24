@@ -1,5 +1,5 @@
 <?php
-include_once 'C:/xampp/htdocs/workshopsoftware/models/LoginModel.php';
+include_once __DIR__ . '/../models/LoginModel.php';
 
 class LoginController
 {
@@ -12,7 +12,9 @@ class LoginController
 
     public function login($username, $password)
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         $result = $this->loginModel->authenticate($username, $password);
         if ($result === 'username') {

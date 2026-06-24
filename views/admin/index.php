@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -40,20 +47,20 @@
                     <tbody>
                         <?php foreach ($admins as $admin) : ?>
                             <tr>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo $admin['AdmDocumento'] ?></td>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"><?php echo $admin['AdmNombre'] ?></td>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"><?php echo $admin['AdmApellido'] ?></td>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo $admin['AdmTelefono'] ?></td>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo $admin['AdmCorreo'] ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($admin['AdmDocumento'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"><?php echo htmlspecialchars($admin['AdmNombre'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"><?php echo htmlspecialchars($admin['AdmApellido'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($admin['AdmTelefono'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($admin['AdmCorreo'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4">
                                     <div>
-                                        <a href="view.php?id=<?php echo $admin['idAdministrador']; ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
+                                        <a href="view.php?id=<?php echo htmlspecialchars($admin['idAdministrador'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
                                     </div>
                                     <div>
-                                        <a href="edit.php?id=<?php echo $admin['idAdministrador']; ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
+                                        <a href="edit.php?id=<?php echo htmlspecialchars($admin['idAdministrador'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
                                     </div>
                                     <div>
-                                        <a href="delete.php?id=<?php echo $admin['idAdministrador']; ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
+                                        <a href="delete.php?id=<?php echo htmlspecialchars($admin['idAdministrador'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
                                     </div>
                                 </td>
                             </tr>

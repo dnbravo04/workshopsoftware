@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es-CO">
 
@@ -41,7 +48,7 @@
                     <tbody>
                         <?php foreach ($reports as $report) : ?>
                             <tr>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo $report['RepFecha']; ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($report['RepFecha'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <?php
                                 $motorbikeData = $maintenanceReportController->showMotorbikeByMaintenanceReport($report['idReporte']);
                                 if ($motorbikeData !== null) :
@@ -50,12 +57,12 @@
                                     echo '<td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"></td>';
                                 endif;
                                 ?>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo $report['RepInformeDiagnostico']; ?></td>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"><?php echo $report['RepMantenimientoRealizado']; ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($report['RepInformeDiagnostico'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"><?php echo htmlspecialchars($report['RepMantenimientoRealizado'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4">
-                                    <a href="view.php?id=<?php echo $report['idReporte']; ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
-                                    <a href="edit.php?id=<?php echo $report['idReporte']; ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
-                                    <a href="delete.php?id=<?php echo $report['idReporte']; ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
+                                    <a href="view.php?id=<?php echo htmlspecialchars($report['idReporte'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
+                                    <a href="edit.php?id=<?php echo htmlspecialchars($report['idReporte'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
+                                    <a href="delete.php?id=<?php echo htmlspecialchars($report['idReporte'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

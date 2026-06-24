@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es-CO">
 
@@ -33,34 +40,34 @@
                 <h2 class="text-2xl font-semibold mb-4">Editar Cliente</h2>
                 <form action="" method="POST">
 
-                    <input type="hidden" name="idCliente" value="<?php echo $cliente['idCliente']; ?>">
+                    <input type="hidden" name="idCliente" value="<?php echo htmlspecialchars($cliente['idCliente'], ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="mb-4">
                         <label for="CliDocumento" class="block text-gray-700 dark:text-white">Documento:</label>
-                        <input type="text" id="CliDocumento" name="CliDocumento" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $cliente['CliDocumento']; ?>" required>
+                        <input type="text" id="CliDocumento" name="CliDocumento" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($cliente['CliDocumento'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="CliNombre" class="block text-gray-700 dark:text-white">Nombre:</label>
-                        <input type="text" id="CliNombre" name="CliNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $cliente['CliNombre']; ?>" required>
+                        <input type="text" id="CliNombre" name="CliNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($cliente['CliNombre'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="CliApellido" class="block text-gray-700 dark:text-white">Apellido:</label>
-                        <input type="text" id="CliApellido" name="CliApellido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $cliente['CliApellido']; ?>" required>
+                        <input type="text" id="CliApellido" name="CliApellido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($cliente['CliApellido'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="CliTelefono" class="block text-gray-700 dark:text-white">Teléfono:</label>
-                        <input type="text" id="CliTelefono" name="CliTelefono" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $cliente['CliTelefono']; ?>" required>
+                        <input type="text" id="CliTelefono" name="CliTelefono" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($cliente['CliTelefono'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="CliTelefonoSecundario" class="block text-gray-700 dark:text-white">Teléfono Secundario:</label>
-                        <input type="text" id="CliTelefonoSecundario" name="CliTelefonoSecundario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $cliente['CliTelefonoSecundario']; ?>">
+                        <input type="text" id="CliTelefonoSecundario" name="CliTelefonoSecundario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($cliente['CliTelefonoSecundario'], ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="mb-4">
                         <label for="CliCorreo" class="block text-gray-700 dark:text-white">Correo:</label>
-                        <input type="email" id="CliCorreo" name="CliCorreo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $cliente['CliCorreo']; ?>" required>
+                        <input type="email" id="CliCorreo" name="CliCorreo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($cliente['CliCorreo'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="CliDireccion" class="block text-gray-700 dark:text-white">Dirección:</label>
-                        <textarea id="CliDireccion" name="CliDireccion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required><?php echo $cliente['CliDireccion']; ?></textarea>
+                        <textarea id="CliDireccion" name="CliDireccion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required><?php echo htmlspecialchars($cliente['CliDireccion'], ENT_QUOTES, 'UTF-8'); ?></textarea>
                     </div>
                     <div class="flex p-1 justify-center space-x-3 mb-4">
                         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">

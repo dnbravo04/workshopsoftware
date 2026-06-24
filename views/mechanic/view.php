@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -28,9 +35,9 @@
                     <div class="w-full max-w-6xl dark:bg-gray-700 mx-auto bg-white rounded-lg shadow-lg p-5">
                         <div class="flex-col">
                             <p class="my-2">
-                                <strong class="text-4xl font-bold"><?php echo $mechanic['MecNombre'] . ' ' . $mechanic['MecApellido'] ?></strong>
+                                <strong class="text-4xl font-bold"><?php echo htmlspecialchars($mechanic['MecNombre'] . ' ' . $mechanic['MecApellido'], ENT_QUOTES, 'UTF-8') ?></strong>
                                 <br>
-                                <span class="text-xl pt-2">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $mechanic['MecEspecializacion'] ?></span>
+                                <span class="text-xl pt-2">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($mechanic['MecEspecializacion'], ENT_QUOTES, 'UTF-8') ?></span>
                             </p>
                         </div>
                     </div>
@@ -40,28 +47,28 @@
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Documento:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $mechanic['MecDocumento']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($mechanic['MecDocumento'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">ID del Mecanico:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $mechanic['idMecanico']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($mechanic['idMecanico'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Telefono:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $mechanic['MecTelefono']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($mechanic['MecTelefono'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Correo:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $mechanic['MecCorreo']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($mechanic['MecCorreo'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                         </div>

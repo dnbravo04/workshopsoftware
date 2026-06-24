@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -33,30 +40,30 @@
                 <h2 class="text-2xl font-semibold mb-4">Editar Mecánico</h2>
                 <form action="" method="POST">
 
-                    <input type="hidden" name="idMecanico" value="<?php echo $mecanico['idMecanico']; ?>">
+                    <input type="hidden" name="idMecanico" value="<?php echo htmlspecialchars($mecanico['idMecanico'], ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="mb-4">
                         <label for="MecDocumento" class="block text-gray-700 dark:text-white">Documento:</label>
-                        <input type="text" id="MecDocumento" name="MecDocumento" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $mecanico['MecDocumento']; ?>" required>
+                        <input type="text" id="MecDocumento" name="MecDocumento" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($mecanico['MecDocumento'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="MecNombre" class="block text-gray-700 dark:text-white">Nombre:</label>
-                        <input type="text" id="MecNombre" name="MecNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $mecanico['MecNombre']; ?>" required>
+                        <input type="text" id="MecNombre" name="MecNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($mecanico['MecNombre'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="MecApellido" class="block text-gray-700 dark:text-white">Apellido:</label>
-                        <input type="text" id="MecApellido" name="MecApellido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $mecanico['MecApellido']; ?>" required>
+                        <input type="text" id="MecApellido" name="MecApellido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($mecanico['MecApellido'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="MecTelefono" class="block text-gray-700 dark:text-white">Teléfono:</label>
-                        <input type="text" id="MecTelefono" name="MecTelefono" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $mecanico['MecTelefono']; ?>" required>
+                        <input type="text" id="MecTelefono" name="MecTelefono" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($mecanico['MecTelefono'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="MecCorreo" class="block text-gray-700 dark:text-white">Correo:</label>
-                        <input type="email" id="MecCorreo" name="MecCorreo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $mecanico['MecCorreo']; ?>" required>
+                        <input type="email" id="MecCorreo" name="MecCorreo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($mecanico['MecCorreo'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="MecEspecializacion" class="block text-gray-700 dark:text-white">Especialización:</label>
-                        <input type="text" id="MecEspecializacion" name="MecEspecializacion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $mecanico['MecEspecializacion']; ?>" required>
+                        <input type="text" id="MecEspecializacion" name="MecEspecializacion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($mecanico['MecEspecializacion'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="flex p-1 justify-center space-x-3 mb-4">
                         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">

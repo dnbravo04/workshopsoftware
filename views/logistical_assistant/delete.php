@@ -1,4 +1,9 @@
-<?php
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
 include '../../controllers/LogisticalAssistantController.php';
 if (isset($_GET['id'])) {
     $idAsistLogistico = $_GET['id'];
@@ -40,9 +45,9 @@ if ($asistLogistico !== null && $_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php
         if (isset($asistLogistico)) {
         ?>
-            <p class="mb-4">¿Estás seguro de que deseas eliminar al Asistente logistico <strong><?php echo $asistLogistico['ALNombre'] . ' ' . $asistLogistico['ALApellido']; ?></strong>?</p>
+            <p class="mb-4">¿Estás seguro de que deseas eliminar al Asistente logistico <strong><?php echo htmlspecialchars($asistLogistico['ALNombre'] . ' ' . $asistLogistico['ALApellido'], ENT_QUOTES, 'UTF-8'); ?></strong>?</p>
             <form action="" method="POST">
-                <input type="hidden" name="idAsistLogistico" value="<?php echo $asistLogistico['idAsistLogistico']; ?>">
+                <input type="hidden" name="idAsistLogistico" value="<?php echo htmlspecialchars($asistLogistico['idAsistLogistico'], ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="flex p-1 justify-center space-x-3 mb-4">
                     <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
                         <i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Borrar Cliente

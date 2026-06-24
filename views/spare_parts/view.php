@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es-CO">
 
@@ -32,9 +39,9 @@
                     <div class="w-full max-w-6xl dark:bg-gray-700 mx-auto bg-white rounded-lg shadow-lg p-5">
                         <div class="flex-col">
                             <p class="my-2">
-                                <strong class="text-4xl font-bold"><?php echo $sparePart['RepuNombre'] ?></strong>
+                                <strong class="text-4xl font-bold"><?php echo htmlspecialchars($sparePart['RepuNombre'], ENT_QUOTES, 'UTF-8') ?></strong>
                                 <br>
-                                <span class="text-xl pt-2">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $sparePart['RepuCodigo'] ?></span>
+                                <span class="text-xl pt-2">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($sparePart['RepuCodigo'], ENT_QUOTES, 'UTF-8') ?></span>
                             </p>
                         </div>
                     </div>
@@ -46,21 +53,21 @@
                                     <p class="my-2">
                                         <strong class="text-base font-bold">Id interno del repuesto:</strong>
                                         <br>
-                                        <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $sparePart['idRepuesto']; ?></span>
+                                        <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($sparePart['idRepuesto'], ENT_QUOTES, 'UTF-8'); ?></span>
                                     </p>
                                 </div>
                                 <div>
                                     <p class="my-2">
                                         <strong class="text-base font-bold">Nombre:</strong>
                                         <br>
-                                        <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $sparePart['RepuNombre']; ?></span>
+                                        <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($sparePart['RepuNombre'], ENT_QUOTES, 'UTF-8'); ?></span>
                                     </p>
                                 </div>
                                 <div>
                                     <p class="my-2">
                                         <strong class="text-base font-bold">Marca:</strong>
                                         <br>
-                                        <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $sparePart['RepuMarca']; ?></span>
+                                        <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($sparePart['RepuMarca'], ENT_QUOTES, 'UTF-8'); ?></span>
                                     </p>
                                 </div>
                             </div>
@@ -68,24 +75,24 @@
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Codigo:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $sparePart['RepuCodigo']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($sparePart['RepuCodigo'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Tipo:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $sparePart['RepuTipo']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($sparePart['RepuTipo'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Modelo:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $sparePart['RepuModelo']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($sparePart['RepuModelo'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                         </div>
                         <p class="my-2">
                             <strong class="text-base font-bold">Descripción:</strong>
                             <br>
-                            <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $sparePart['RepuDescripcion']; ?></span>
+                            <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($sparePart['RepuDescripcion'], ENT_QUOTES, 'UTF-8'); ?></span>
                         </p>
                     </div>
                 </div>

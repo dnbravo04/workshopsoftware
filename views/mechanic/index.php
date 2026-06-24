@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -41,16 +48,16 @@
                     <tbody>
                         <?php foreach ($mechanics as $mechanic) : ?>
                             <tr>
-                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo $mechanic['MecDocumento'] ?></td>
-                                <td class="text-left py-2 px-4"><?php echo $mechanic['MecNombre'] ?></td>
-                                <td class="text-left py-2 px-4"><?php echo $mechanic['MecApellido'] ?></td>
-                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo $mechanic['MecTelefono'] ?></td>
-                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo $mechanic['MecCorreo'] ?></td>
-                                <td class="text-left py-2 px-4"><?php echo $mechanic['MecEspecializacion'] ?></td>
+                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($mechanic['MecDocumento'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td class="text-left py-2 px-4"><?php echo htmlspecialchars($mechanic['MecNombre'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td class="text-left py-2 px-4"><?php echo htmlspecialchars($mechanic['MecApellido'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($mechanic['MecTelefono'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td class="text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($mechanic['MecCorreo'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td class="text-left py-2 px-4"><?php echo htmlspecialchars($mechanic['MecEspecializacion'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td class="text-left py-2 px-4">
-                                    <a href="view.php?id=<?php echo $mechanic['idMecanico'] ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
-                                    <a href="edit.php?id=<?php echo $mechanic['idMecanico'] ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
-                                    <a href="delete.php?id=<?php echo $mechanic['idMecanico'] ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
+                                    <a href="view.php?id=<?php echo htmlspecialchars($mechanic['idMecanico'], ENT_QUOTES, 'UTF-8') ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
+                                    <a href="edit.php?id=<?php echo htmlspecialchars($mechanic['idMecanico'], ENT_QUOTES, 'UTF-8') ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
+                                    <a href="delete.php?id=<?php echo htmlspecialchars($mechanic['idMecanico'], ENT_QUOTES, 'UTF-8') ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

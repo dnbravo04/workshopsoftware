@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,9 +38,9 @@
                     <div class="w-full max-w-6xl dark:bg-gray-700 mx-auto bg-white rounded-lg shadow-lg p-5">
                         <div class="flex-col">
                             <p class="my-2">
-                                <strong class="text-4xl font-bold"><?php echo $motorbike['MtPlaca']  ?></strong>
+                                <strong class="text-4xl font-bold"><?php echo htmlspecialchars($motorbike['MtPlaca'], ENT_QUOTES, 'UTF-8')  ?></strong>
                                 <br>
-                                <span class="text-xl pt-2">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtMarca'] . ' - ' . $motorbike['MtModelo'] ?></span>
+                                <span class="text-xl pt-2">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtMarca'] . ' - ' . $motorbike['MtModelo'], ENT_QUOTES, 'UTF-8') ?></span>
                             </p>
                         </div>
                     </div>
@@ -44,34 +51,34 @@
                                 <p class="my-2">
                                     <strong class="text-base font-bold">ID interna de la motocicleta:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['idMotocicleta']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['idMotocicleta'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Marca de la motocicleta:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtMarca']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtMarca'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Color:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtColor']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtColor'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div class="col-span-1">
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Placa:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtPlaca']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtPlaca'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Modelo:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtModelo']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtModelo'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Cilindraje:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtCilindraje']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtCilindraje'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                         </div>
@@ -83,17 +90,17 @@
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Nombre completo:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliNombre'] . ' ' . $client['CliApellido']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliNombre'] . ' ' . $client['CliApellido'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">telefono principal:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliTelefono']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliTelefono'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Dirección:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliDireccion']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliDireccion'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
 
@@ -101,17 +108,17 @@
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Documento:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliDocumento']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliDocumento'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Telefono Secundario:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliTelefonoSecundario']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliTelefonoSecundario'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Correo:</strong>
                                     <br>
-                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliCorreo']; ?></span>
+                                    <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliCorreo'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                         </div>

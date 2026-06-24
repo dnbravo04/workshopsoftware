@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es-CO">
 
@@ -35,26 +42,26 @@
                 <h2 class="text-2xl font-semibold mb-4">Editar motocicleta</h2>
                 <form action="" method="POST">
 
-                    <input type="hidden" name="idMotocicleta" value="<?php echo $motocicleta['idMotocicleta']; ?>">
+                    <input type="hidden" name="idMotocicleta" value="<?php echo htmlspecialchars($motocicleta['idMotocicleta'], ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="mb-4">
                         <label for="MtPlaca" class="block text-gray-700 dark:text-white">Placa:</label>
-                        <input type="text" id="MtPlaca" name="MtPlaca" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $motocicleta['MtPlaca']; ?>" required>
+                        <input type="text" id="MtPlaca" name="MtPlaca" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($motocicleta['MtPlaca'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="MtMarca" class="block text-gray-700 dark:text-white">Marca:</label>
-                        <input type="text" id="MtMarca" name="MtMarca" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $motocicleta['MtMarca']; ?>" required>
+                        <input type="text" id="MtMarca" name="MtMarca" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($motocicleta['MtMarca'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="MtModelo" class="block text-gray-700 dark:text-white">Modelo:</label>
-                        <input type="text" id="MtModelo" name="MtModelo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $motocicleta['MtModelo']; ?>" required>
+                        <input type="text" id="MtModelo" name="MtModelo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($motocicleta['MtModelo'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="MtCilindraje" class="block text-gray-700 dark:text-white">Cilindraje:</label>
-                        <input type="text" id="MtCilindraje" name="MtCilindraje" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $motocicleta['MtCilindraje']; ?>" required>
+                        <input type="text" id="MtCilindraje" name="MtCilindraje" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($motocicleta['MtCilindraje'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <div class="mb-4">
                         <label for="MtColor" class="block text-gray-700 dark:text-white">Color:</label>
-                        <input type="text" id="MtColor" name="MtColor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $motocicleta['MtColor']; ?>" required>
+                        <input type="text" id="MtColor" name="MtColor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo htmlspecialchars($motocicleta['MtColor'], ENT_QUOTES, 'UTF-8'); ?>" required>
                     </div>
                     <label for="MtCliente" class="block text-gray-700 dark:text-white">Cliente:</label>
                     <div class="mb-4">

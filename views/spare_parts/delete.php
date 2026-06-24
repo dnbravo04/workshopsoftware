@@ -1,4 +1,9 @@
-<?php
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
 include '../../controllers/SparePartsController.php';
 if (isset($_GET['id'])) {
     $idRepuesto = $_GET['id'];
@@ -37,9 +42,9 @@ if ($repuesto !== null && $_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php
         if (isset($repuesto)) {
         ?>
-            <p class="mb-4">Estás seguro de que deseas borrar el repuesto<strong> <?php echo $repuesto['RepuCodigo'] . ' - ' . $repuesto['RepuNombre']; ?></strong>?</p>
+            <p class="mb-4">Estás seguro de que deseas borrar el repuesto<strong> <?php echo htmlspecialchars($repuesto['RepuCodigo'] . ' - ' . $repuesto['RepuNombre'], ENT_QUOTES, 'UTF-8'); ?></strong>?</p>
             <form action="" method="POST">
-                <input type="hidden" name="idRepuesto" value="<?php echo $repuesto['idRepuesto']; ?>">
+                <input type="hidden" name="idRepuesto" value="<?php echo htmlspecialchars($repuesto['idRepuesto'], ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="flex p-1 justify-center space-x-3 mb-4">
                     <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
                         <i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Borrar repuesto

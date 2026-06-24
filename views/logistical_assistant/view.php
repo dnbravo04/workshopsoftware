@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -28,7 +35,7 @@
                     <div class="w-full max-w-6xl dark:bg-gray-700 mx-auto bg-white rounded-lg shadow-lg p-5">
                         <div class="flex-col">
                             <p class="my-2">
-                                <strong class="text-4xl font-bold"><?php echo $asistenteLogistico['ALNombre'] . ' ' . $asistenteLogistico['ALApellido'] ?></strong>
+                                <strong class="text-4xl font-bold"><?php echo htmlspecialchars($asistenteLogistico['ALNombre'] . ' ' . $asistenteLogistico['ALApellido'], ENT_QUOTES, 'UTF-8') ?></strong>
                                 <br>
                                 <span class="text-xl pt-2">&nbsp;&nbsp;&nbsp;&nbsp;Asistente Logistico</span>
                             </p>
@@ -40,28 +47,28 @@
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Documento:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $asistenteLogistico['ALDocumento']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($asistenteLogistico['ALDocumento'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">ID del Asistente Logistico:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $asistenteLogistico['idAsistLogistico']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($asistenteLogistico['idAsistLogistico'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Telefono:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $asistenteLogistico['ALTelefono']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($asistenteLogistico['ALTelefono'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                             <div>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Correo:</strong>
                                     <br>
-                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $asistenteLogistico['ALCorreo']; ?></span>
+                                    <span class="text-xl">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo htmlspecialchars($asistenteLogistico['ALCorreo'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </p>
                             </div>
                         </div>

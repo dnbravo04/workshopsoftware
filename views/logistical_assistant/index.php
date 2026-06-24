@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -43,15 +50,15 @@
                     <tbody>
                         <?php foreach ($logisticalAssistants as $logisticalAssistant) : ?>
                             <tr>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo $logisticalAssistant['ALDocumento']; ?></td>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"><?php echo $logisticalAssistant['ALNombre']; ?></td>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"><?php echo $logisticalAssistant['ALApellido']; ?></td>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo $logisticalAssistant['ALTelefono']; ?></td>
-                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo $logisticalAssistant['ALCorreo']; ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($logisticalAssistant['ALDocumento'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"><?php echo htmlspecialchars($logisticalAssistant['ALNombre'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4"><?php echo htmlspecialchars($logisticalAssistant['ALApellido'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($logisticalAssistant['ALTelefono'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4 hidden md:table-cell"><?php echo htmlspecialchars($logisticalAssistant['ALCorreo'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td class="dark:bg-gray-800 dark:text-white text-left py-2 px-4">
-                                    <a href="view.php?id=<?php echo $logisticalAssistant['idAsistLogistico']; ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
-                                    <a href="edit.php?id=<?php echo $logisticalAssistant['idAsistLogistico']; ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
-                                    <a href="delete.php?id=<?php echo $logisticalAssistant['idAsistLogistico']; ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
+                                    <a href="view.php?id=<?php echo htmlspecialchars($logisticalAssistant['idAsistLogistico'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-green-500 hover:bg-green-600 font-semibold p-1 text-white hover:underline rounded m-2  block"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> Detalles</a>
+                                    <a href="edit.php?id=<?php echo htmlspecialchars($logisticalAssistant['idAsistLogistico'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-blue-500 hover:bg-blue-600 font-semibold p-1 text-white hover:underline rounded m-2 block"> <i class="fa-solid fa-pencil" style="color: #ffffff;"></i> Editar</a>
+                                    <a href="delete.php?id=<?php echo htmlspecialchars($logisticalAssistant['idAsistLogistico'], ENT_QUOTES, 'UTF-8'); ?>" class="bg-red-500 hover:bg-red-600 font-semibold p-1 text-white hover:underline rounded m-2 block"><i class="fa-solid fa-eraser" style="color: #ffffff;"></i> Eliminar</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

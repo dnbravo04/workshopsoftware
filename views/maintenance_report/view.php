@@ -1,3 +1,10 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -34,7 +41,7 @@
             <div class="container mx-auto mt-10">
                 <h2 class="text-center text-xl font-bold">Datos del informe de mantenimiento</h2>
                 <div class="flow-root mx-auto max-w-6xl mb-4">
-                    <h3 class="float-left text-xl text-right font-semibold pt-3">ID del reporte: RM-<?php echo $maintenanceReport['idReporte']; ?></h3>
+                    <h3 class="float-left text-xl text-right font-semibold pt-3">ID del reporte: RM-<?php echo htmlspecialchars($maintenanceReport['idReporte'], ENT_QUOTES, 'UTF-8'); ?></h3>
                     <h3 class="float-right text-xl font-semibold pt-3">Fecha de generación del reporte: <?php echo $currentDate ?></h3>
                 </div>
                 <div class="w-full max-w-6xl dark:bg-gray-700 mx-auto my-3 bg-white rounded-lg shadow-lg p-5">
@@ -44,12 +51,12 @@
                             <p class="my-2">
                                 <strong class="text-base font-bold">Fecha del mantenimiento:</strong>
                                 <br>
-                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $maintenanceReport['RepFecha']; ?></span>
+                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($maintenanceReport['RepFecha'], ENT_QUOTES, 'UTF-8'); ?></span>
                             </p>
                             <p class="my-2">
                                 <strong class="text-base font-bold">Informe diagnostico preliminar:</strong>
                                 <br>
-                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $maintenanceReport['RepInformeDiagnostico']; ?></span>
+                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($maintenanceReport['RepInformeDiagnostico'], ENT_QUOTES, 'UTF-8'); ?></span>
                             </p>
                             <p class="my-2">
                                 <strong class="text-base font-bold">Mecanico Encargado:</strong>
@@ -67,12 +74,12 @@
                             <p class="my-2">
                                 <strong class="text-base font-bold">Tiempo de reparación:</strong>
                                 <br>
-                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $maintenanceReport['RepTiempoReparacion']; ?></span>
+                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($maintenanceReport['RepTiempoReparacion'], ENT_QUOTES, 'UTF-8'); ?></span>
                             </p>
                             <p class="my-2">
                                 <strong class="text-base font-bold">Mantenimiento Realizado:</strong>
                                 <br>
-                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $maintenanceReport['RepMantenimientoRealizado']; ?></span>
+                                <span class="text-xl"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($maintenanceReport['RepMantenimientoRealizado'], ENT_QUOTES, 'UTF-8'); ?></span>
                             </p>
                             <p class="my-2">
                                 <strong class="text-base font-bold">Especialización del Mecanico:</strong>
@@ -95,14 +102,14 @@
                                 <strong class="text-base font-bold">Codigo del Repuesto:</strong>
                                 <br>
                                 <span class="text-xl">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $sparePart['RepuCodigo']; ?>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($sparePart['RepuCodigo'], ENT_QUOTES, 'UTF-8'); ?>
                                 </span>
                             </p>
                             <p class="my-2">
                                 <strong class="text-base font-bold">Descripción:</strong>
                                 <br>
                                 <span class="text-xl">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $sparePart['RepuDescripcion']; ?>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($sparePart['RepuDescripcion'], ENT_QUOTES, 'UTF-8'); ?>
                                 </span>
                             </p>
 
@@ -110,7 +117,7 @@
                                 <strong class="text-base font-bold">Marca:</strong>
                                 <br>
                                 <span class="text-xl">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $sparePart['RepuMarca']; ?>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($sparePart['RepuMarca'], ENT_QUOTES, 'UTF-8'); ?>
                                 </span>
                             </p>
                         </div>
@@ -119,14 +126,14 @@
                                 <strong class="text-base font-bold">Nombre:</strong>
                                 <br>
                                 <span class="text-xl">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $sparePart['RepuNombre']; ?>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($sparePart['RepuNombre'], ENT_QUOTES, 'UTF-8'); ?>
                                 </span>
                             </p>
                             <p class="my-2">
                                 <strong class="text-base font-bold">Tipo de repuesto:</strong>
                                 <br>
                                 <span class="text-xl">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $sparePart['RepuTipo']; ?>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($sparePart['RepuTipo'], ENT_QUOTES, 'UTF-8'); ?>
                                 </span>
                             </p>
 
@@ -134,7 +141,7 @@
                                 <strong class="text-base font-bold">Modelo:</strong>
                                 <br>
                                 <span class="text-xl">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $sparePart['RepuModelo']; ?>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($sparePart['RepuModelo'], ENT_QUOTES, 'UTF-8'); ?>
                                 </span>
                             </p>
                         </div>
@@ -149,21 +156,21 @@
                                     <strong class="text-base font-bold">Placa:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtPlaca']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtPlaca'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Modelo:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtModelo']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtModelo'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Color:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtColor']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtColor'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                             </div>
@@ -172,21 +179,21 @@
                                     <strong class="text-base font-bold">ID interno:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['idMotocicleta']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['idMotocicleta'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Marca:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtMarca']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtMarca'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Cilindraje:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $motorbike['MtCilindraje']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($motorbike['MtCilindraje'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                             </div>
@@ -201,21 +208,21 @@
                                     <strong class="text-base font-bold">Nombre completo:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliNombre'] . ' ' . $client['CliApellido']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliNombre'] . ' ' . $client['CliApellido'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Telefono:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliTelefono']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliTelefono'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Dirección:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliDireccion']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliDireccion'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                             </div>
@@ -224,21 +231,21 @@
                                     <strong class="text-base font-bold">Documento:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliDocumento']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliDocumento'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Telefono secundario:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliTelefonoSecundario']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliTelefonoSecundario'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                                 <p class="my-2">
                                     <strong class="text-base font-bold">Correo:</strong>
                                     <br>
                                     <span class="text-xl">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $client['CliCorreo']; ?>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<?php echo htmlspecialchars($client['CliCorreo'], ENT_QUOTES, 'UTF-8'); ?>
                                     </span>
                                 </p>
                             </div>
